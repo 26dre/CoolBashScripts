@@ -1,0 +1,31 @@
+
+cx: 
+	Turns on the execution bit for all files passed into it. 
+	Run using "cx [FILES]"
+	Options: None / Ignored, everything is checked as a file 
+
+lss: 
+	Returns all files in current directory sorted by size in long format. 
+	Does NOT take in any additional arguments
+	Example run: "lss"
+
+whoson: 
+	Returns all current undergrad students on the current machine in sorted order. 
+	Does NOT take in any additional arguments
+	Example run: "whoson"
+
+howmany: 
+	Returns the number of current undergrad students on the current machine. 
+	Does NOT take in any additional arguments
+	Example run: "howmany""
+
+valid: 
+	Returns if a variable name is valid by the C convention. 
+	Takes in only 1 input which is a potentially valid or invalid variable name
+	Example run: "valid foobar"
+
+prargs: 
+	Prints out all arguments passed into itself. 
+	Takes in any number of arguments and prints them back out in listed order. 
+	Example run: "prargs foo bar 1 '2 3'"
+
