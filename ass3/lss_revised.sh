@@ -70,14 +70,22 @@ contains () {
     needle=$1
     haystack=$2
     echo "Attempting to find $needle in ${haystack[@]}"
-    case $needle in 
-        "${haystack[@]}" )
+
+    for possibility in "${haystack[@]}"; do
+        if [[ $needle == $possibility ]]; then
             return 1
-            ;;
-        * )
-            return 0
-            ;;
-    esac
+        fi
+    done 
+    return 0
+
+    # case $needle in 
+    #     "${haystack[@]}" )
+    #         return 1
+    #         ;;
+    #     * )
+    #         return 0
+    #         ;;
+    # esac
 }
 show_ascending=0
 ls_options=()
