@@ -69,6 +69,7 @@ contains () {
     # returns 1 if contains, returns 0 if not found
     needle=$1
     haystack=$2
+    echo "Attempting to find $needle in ${haystack[@]}"
     case $needle in 
         "${haystack[@]}" )
             return 1
