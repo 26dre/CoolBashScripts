@@ -18,6 +18,8 @@ else
 	echo "LSS received $# arguments"
 fi
 
+echo "Arguments received: $@"
+
 options_list=()
 file_args_list=()
 
