@@ -20,7 +20,7 @@ fi
 
 echo "Arguments received: $@"
 for arg in "$@"; do 
-    printf "$arg"
+    echo "$arg"
 done
 
 options_list=()
