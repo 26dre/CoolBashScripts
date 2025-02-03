@@ -157,7 +157,9 @@ else
     final_sort_cmd="$final_sort_cmd -r"
 fi
 echo "running $final_ls_cmd | $final_tail_cmd | $final_sort_cmd" 
+echo "sorting on column number $long_bytes_position"
 $final_ls_cmd | $final_tail_cmd | $final_sort_cmd
+
 
 
     
