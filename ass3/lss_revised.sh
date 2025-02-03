@@ -57,7 +57,7 @@ case $ls_param in
         ls -I "${file_params[*]}"  | sort  -k$long_bytes_position -nr 
         ;;
     r )
-        ls -l "${file_params[*]}"  | sort  -k$long_bytes_position -n 
+        ls -l ${file_params[*]}  | sort  -k$long_bytes_position -n 
         echo "got to here"
         ;;
         
