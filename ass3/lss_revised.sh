@@ -64,29 +64,18 @@ echo "Options list = ${options_list[@]}"
 echo "Arguments list = ${file_args_list[@]}"
 
 # determine_options
-contains () {
-    # determines if you can find needle ($1) in a haystack ($2)
-    # returns 1 if contains, returns 0 if not found
-    needle=$1
-    haystack=$2
-    echo "Attempting to find $needle in ${haystack[@]}"
+contains() {
+    local needle="$1"
+    shift  # Move to the next argument (the haystack)
+    local haystack="$*"
 
-    for possibility in "${haystack[@]}"; do
-        if [[ $needle == $possibility ]]; then
-            return 1
-        fi
-    done 
-    return 0
-
-    # case $needle in 
-    #     "${haystack[@]}" )
-    #         return 1
-    #         ;;
-    #     * )
-    #         return 0
-    #         ;;
-    # esac
+    if [[ "$haystack" == *"$needle"* ]]; then
+        return 0  # Success: needle found
+    else
+        return 1  # Failure: needle not found
+    fi
 }
+
 show_ascending=0
 ls_options=()
 sort_options=()
