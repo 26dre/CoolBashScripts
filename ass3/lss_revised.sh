@@ -46,6 +46,11 @@ unpack_arguments () {
         return $file_args_list_append_return_code
     fi
 }
+
+
+for arg in $@; do
+    unpack_arguments $arg
+done
 echo "Options list = ${options_list[@]}"
 echo "Arguments list = ${file_args_list[@]}"
 
