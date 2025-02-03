@@ -151,6 +151,7 @@ if contains -r ${ls_options[@]}; then
 fi
 
 echo "running $final_ls_cmd | $final_tail_cmd | $final_sort_cmd" 
+$final_ls_cmd | $final_tail_cmd | $final_sort_cmd
 
 
     
