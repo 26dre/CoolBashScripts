@@ -148,7 +148,8 @@ final_tail_cmd="$tail_cmd"
 final_sort_cmd=$base_sort_cmd_reversed
 
 
-if contains -h ${sort_options[@]}; then
+if contains -h ${ls_options[@]}; then
+    echo "Requires humanity"
     final_sort_cmd="sort -hk$long_bytes_position"
 fi
 if contains -r ${ls_options[@]}; then
