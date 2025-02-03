@@ -133,7 +133,7 @@ echo "ls_options list = ${ls_options[@]}"
 echo "sort_options list = ${sort_options[@]}"
 echo "arguments list = ${file_args_list[@]}"
 
-if [[ contains "-o" ls_options == 1 ]]; then
+if [[ "contains -o $ls_options" == 1 ]]; then
     echo "Contains -o"
 fi
 
