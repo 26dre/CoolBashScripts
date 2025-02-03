@@ -48,13 +48,13 @@ esac
 
 case $ls_param in 
     a | A | b | B | f | F | L | N | n | 1 | x | S | k | i | G | sk)
-        ls -l -$ls_param "${file_params[*]}" | sort  -k$long_bytes_position -nr
+        ls -l -$ls_param ${file_params[*]} | sort  -k$long_bytes_position -nr
         ;;
     g | o )
-        ls -$ls_param "${file_params[*]}" | sort  -k$long_bytes_position -nr
+        ls -$ls_param ${file_params[*]} | sort  -k$long_bytes_position -nr
         ;;
     I )
-        ls -I "${file_params[*]}"  | sort  -k$long_bytes_position -nr 
+        ls -I ${file_params[*]}  | sort  -k$long_bytes_position -nr 
         ;;
     r )
         ls -l ${file_params[*]}  | sort  -nk$long_bytes_position  
