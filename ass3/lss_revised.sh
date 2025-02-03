@@ -57,8 +57,8 @@ case $ls_param in
         ls -I ${file_params[*]}  | sort  -k$long_bytes_position -nr 
         ;;
     r )
+        echo "Running with -r"
         ls -l ${file_params[*]}  | sort  -nk$long_bytes_position  
-        echo "got to here"
         ;;
         
 esac
