@@ -135,6 +135,8 @@ echo "arguments list = ${file_args_list[@]}"
 
 if [[ "contains -o $ls_options" == 1 ]]; then
     echo "Contains -o"
+else 
+    echo "Does not contain"
 fi
 
 
