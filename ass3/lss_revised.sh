@@ -123,6 +123,7 @@ echo "sort_options list = ${sort_options[@]}"
 for option in "${options_list[@]}"; do
     deal_with_option $option
 
+done
 
 
 
