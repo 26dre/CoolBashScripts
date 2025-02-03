@@ -128,11 +128,8 @@ echo "arguments list = ${file_args_list[@]}"
 if contains -o ${ls_options[@]} || contains -G ${ls_options[@]} || contains -g ${ls_options[@]}; then
     # echo "Contains -o or -g or -G"
     base_ls_cmd="ls"
-else 
-    # echo "Does not contain -o or -g or -G"
 fi
 
-# if contains -r ${ls_options[@]};
 final_ls_cmd="$base_ls_cmd ${ls_options[@]} ${file_args_list[@]}" 
 final_tail_cmd="$tail_cmd"  
 final_sort_cmd="sort -nk$long_bytes_position";
