@@ -135,11 +135,26 @@ echo "sort_options list = ${sort_options[@]}"
 echo "arguments list = ${file_args_list[@]}"
 
 
-if contains -o ${ls_options[@]} ; then
-    echo "Contains -o"
+if contains -o ${ls_options[@]} || contains -G ${ls_options[@]} || contains -g ${ls_options[@]}; then
+    echo "Contains -o or -g or -G"
+    base_ls_cmd="ls"
 else 
-    echo "Does not contain"
+    echo "Does not contain -o or -g or -G"
 fi
+
+# if contains -r ${ls_options[@]};
+final_ls_cmd="$base_ls_cmd ${ls_options[@]} ${file_args_list[@]}" 
+final_tail_cmd="$tail_cmd"  
+final_sort_cmd=$base_sort_cmd_reversed
+if contains -r ${ls_options[@]}; then
+    final_sort_cmd=$base_sort_cmd
+
+echo "running $final_ls_cmd | $final_tail_cmd | $final_sort_cmd" 
+
+
+    
+
+
 
 
 # basic_inputs="a A b B f F L N n 1 x S k" 
