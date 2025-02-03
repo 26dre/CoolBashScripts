@@ -111,7 +111,7 @@ deal_with_option () {
         I )
             ls_options+=("-$option")
             ls_options+=("${file_args_list[0]}")
-            file_args_list=(\""${file_args_list[@]:1}"\")
+            file_args_list=("\"${file_args_list[@]:1}\"")
             ;;
         r )
             show_ascending=1
