@@ -52,9 +52,9 @@ for arg in "$@"; do
     # echo "Arg received: $arg"
     unpack_arguments "$arg"
 done
-echo "Options list = ${options_list[@]}"
+# echo "Options list = ${options_list[@]}"
 # echo "Options list shifted = ${options_list[@]:1}"
-echo "Arguments list = ${file_args_list[@]}"
+# echo "Arguments list = ${file_args_list[@]}"
 
 # determine_options
 contains() {
@@ -120,9 +120,9 @@ for option in "${options_list[@]}"; do
     deal_with_option $option
 done
 
-echo "ls_options list = ${ls_options[@]}"
-echo "sort_options list = ${sort_options[@]}"
-echo "arguments list = ${file_args_list[@]}"
+# echo "ls_options list = ${ls_options[@]}"
+# echo "sort_options list = ${sort_options[@]}"
+# echo "arguments list = ${file_args_list[@]}"
 
 
 if contains -o ${ls_options[@]} || contains -G ${ls_options[@]} || contains -g ${ls_options[@]}; then
