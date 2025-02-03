@@ -40,7 +40,7 @@ case "$ls_param" in
     i ) 
         ((long_bytes_position++))
         ;;
-    g | G | o | r )
+    g | G | o )
         ((long_bytes_position--))
         ;;
     * ) echo "Did not find anything that requires incrementing or decrementing the long_bytes_position_variable" ;; 
