@@ -115,7 +115,6 @@ deal_with_option () {
             echo "$option is not one of the original ls functions, and was therefore skipped"
             ;;
    esac
- 
 }
 echo "ls_options list = ${ls_options[@]}
 echo "sort_options list = ${sort_options[@]}"
@@ -139,35 +138,7 @@ echo "sort_options list = ${sort_options[@]}"
 # -r       requires running sort with -r command               AND long_bytes_position - 1 
 
 
-# long_bytes_inc="i l"
 
-case "$ls_param" in 
-    i ) 
-        ((long_bytes_position++))
-        ;;
-    g | G | o )
-        ((long_bytes_position--))
-        ;;
-    * ) echo "Did not find anything that requires incrementing or decrementing the long_bytes_position_variable" ;; 
-esac
-
-case $ls_param in 
-    a | A | b | B | f | F | L | N | n | 1 | x | S | k | i | G | sk)
-        ls -l -$ls_param ${file_params[*]} | sort  -k$long_bytes_position -nr
-        ;;
-    g | o )
-        ls -$ls_param ${file_params[*]} | sort  -k$long_bytes_position -nr
-        ;;
-    I )
-        ls -I ${file_params[*]}  | sort  -k$long_bytes_position -nr 
-        ;;
-    r )
-        echo "Running with -r"
-        ls -l ${file_params[*]}  | sort  -nk$long_bytes_position  
-        ;;
-        
-esac
-    
     
 
 
