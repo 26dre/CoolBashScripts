@@ -51,7 +51,7 @@ unpack_arguments () {
 }
 
 
-for arg in $@; do
+for arg in "$@"; do
     echo "Arg received: $arg"
     unpack_arguments $arg
 done
