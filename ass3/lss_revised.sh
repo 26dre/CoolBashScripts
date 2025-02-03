@@ -148,6 +148,7 @@ final_tail_cmd="$tail_cmd"
 final_sort_cmd=$base_sort_cmd_reversed
 if contains -r ${ls_options[@]}; then
     final_sort_cmd=$base_sort_cmd
+fi
 
 echo "running $final_ls_cmd | $final_tail_cmd | $final_sort_cmd" 
 
