@@ -19,6 +19,9 @@ else
 fi
 
 echo "Arguments received: $@"
+for arg in "$@"; do 
+    printf "$arg"
+done
 
 options_list=()
 file_args_list=()
