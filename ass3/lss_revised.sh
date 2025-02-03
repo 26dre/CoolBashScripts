@@ -133,6 +133,10 @@ echo "ls_options list = ${ls_options[@]}"
 echo "sort_options list = ${sort_options[@]}"
 echo "arguments list = ${file_args_list[@]}"
 
+if [[ contains "-o" ls_options ]]; then
+    echo "Contains -o"
+fi
+
 
 # basic_inputs="a A b B f F L N n 1 x S k" 
 
