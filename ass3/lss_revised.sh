@@ -46,7 +46,7 @@ case "$ls_param" in
     * ) echo "Did not find anything that requires incrementing or decrementing the long_bytes_position_variable" ;; 
 esac
 
-case "$ls_param" in 
+case $ls_param in 
     a | A | b | B | f | F | L | N | n | 1 | x | S | k | i | G | sk)
         ls -l -$ls_param "${file_params[*]}" | sort  -k$long_bytes_position -nr
         ;;
@@ -56,8 +56,10 @@ case "$ls_param" in
     I )
         ls -I "${file_params[*]}"  | sort  -k$long_bytes_position -nr 
         ;;
-    -r )
+    r )
         ls -I "${file_params[*]}"  | sort  -k$long_bytes_position -n 
+        echo "got to here"
+        ;;
         
 esac
     
