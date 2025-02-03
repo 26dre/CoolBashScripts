@@ -57,6 +57,7 @@ case "$ls_param" in
         ls -I "${file_params[*]}"  | sort  -k$long_bytes_position -nr 
         ;;
     -r )
+        ls -I "${file_params[*]}"  | sort  -k$long_bytes_position -n 
         
 esac
     
