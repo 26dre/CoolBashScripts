@@ -14,14 +14,7 @@ base_sort_cmd_reversed="$base_sort_cmd -r";
 if [[ "$#" == 0 ]]; then 
     # echo "Running LSS command with 0 arguments"
     $base_ls_cmd | $tail_cmd | $base_sort_cmd_reversed
-else
-	echo "LSS received $# arguments"
 fi
-
-echo "Arguments received: $@"
-for arg in "$@"; do 
-    echo "$arg"
-done
 
 options_list=()
 file_args_list=()
@@ -31,7 +24,7 @@ unpack_arguments () {
     # takes in one argument and appends to file_args_list on 2 return status  
     # returns error code 99 on any other setup that doesnt work but this shouldn't break
     arg_to_parse=$1
-    echo $arg_to_parse
+    # echo $arg_to_parse
     options_apend_return_code=1
     file_args_list_append_return_code=2
     error_exit_code=99
@@ -48,7 +41,7 @@ unpack_arguments () {
         fi
 
     else # we are looking at a file type here
-        echo "Appending $arg_to_parse to file_args_list"
+        # echo "Appending $arg_to_parse to file_args_list"
         file_args_list+=("$arg_to_parse")
         return $file_args_list_append_return_code
     fi
@@ -56,7 +49,7 @@ unpack_arguments () {
 
 
 for arg in "$@"; do
-    echo "Arg received: $arg"
+    # echo "Arg received: $arg"
     unpack_arguments "$arg"
 done
 echo "Options list = ${options_list[@]}"
@@ -133,10 +126,10 @@ echo "arguments list = ${file_args_list[@]}"
 
 
 if contains -o ${ls_options[@]} || contains -G ${ls_options[@]} || contains -g ${ls_options[@]}; then
-    echo "Contains -o or -g or -G"
+    # echo "Contains -o or -g or -G"
     base_ls_cmd="ls"
 else 
-    echo "Does not contain -o or -g or -G"
+    # echo "Does not contain -o or -g or -G"
 fi
 
 # if contains -r ${ls_options[@]};
