@@ -46,8 +46,8 @@ unpack_arguments () {
         return $file_args_list_append_return_code
     fi
 }
-echo "Options list = $options_list"
-echo "Arguments list = $file_args_list"
+echo "Options list = ${options_list[@]}"
+echo "Arguments list = ${file_args_list[@]}"
 
 # basic_inputs="a A b B f F L N n 1 x S k" 
 
