@@ -146,10 +146,16 @@ fi
 final_ls_cmd="$base_ls_cmd ${ls_options[@]} ${file_args_list[@]}" 
 final_tail_cmd="$tail_cmd"  
 final_sort_cmd=$base_sort_cmd_reversed
-if contains -r ${ls_options[@]}; then
-    final_sort_cmd=$base_sort_cmd
-fi
 
+
+if contains -h ${sort_options[@]}; then
+    final_sort_cmd="sort -hk$long_bytes_position"
+fi
+if contains -r ${ls_options[@]}; then
+    final_sort_cmd="$final_sort_cmd"
+else
+    final_sort_cmd="$final_sort_cmd -r"
+fi
 echo "running $final_ls_cmd | $final_tail_cmd | $final_sort_cmd" 
 $final_ls_cmd | $final_tail_cmd | $final_sort_cmd
 
