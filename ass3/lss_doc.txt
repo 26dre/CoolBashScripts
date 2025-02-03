@@ -1,0 +1,134 @@
+lss - list directory contents ordered by size
+
+Synopsis: 
+    ls [Option] [File]
+    
+Design Philosophy: 
+    Certain choices were made in order to prune for speed when it was unnecessary for certain things to be added. 
+    e.g. ordering by time in order to later sort by size. While -t could have been throw in there as a safe option
+    to be included. It is simply unnecessary to have a 2 step sorting algorithm when one does just fine. 
+
+    Conversely, -l was kept because as a repetition it has no effect as -l is run regardless. -lo or -lg are both valid commands 
+    and were therefore faithfully represented in my design of lss. 
+
+    There is one notable exclusion made for simplicity's sake: -R. While a recursive listing of this would be both hard to read and
+    (therefore) hard to find useful, the truth about its lack of implementation is simple: It's hard and I didn't really feel like it. 
+    Choosing each relevant line would likely require some sort of crazy grep line that would need to exclude a lot of things selectively. 
+    Frankly, I find it both useless to sort your entire file system by size unless you are just trying to find your biggest file and delete it. 
+    Therefore, I do not feel too bad about excluding -R optionality. 
+
+    Anyway. Let's get to this damn man page. 
+
+    -a
+            do not ignore entries starting with .
+    
+    -A
+            do not list implied . and ..
+
+    -b
+            print C-style escapes for nongraphic characters
+
+    -B
+            do not list implied entries ending with ~
+
+    -c     
+            (with -lt: sort by, and show, ctime (time of last modification of file status information); with -l: show ctime and sort by name; otherwise: sort by ctime, newest first)
+            THIS FUNCTIONALITY WAS CUT FOR SPEED SAKE
+
+    -C     list entries by columns
+    
+    -d
+            list directories themselves, not their contents
+
+    -D
+            generate output designed for Emacs' dired mode
+            THIS FUNCTIONALITY WAS CUT CUZ JUST USE VIM BRO
+
+    -f     do not sort, enable -aU, disable -ls --color
+            THIS FUNCTIONALITY WAS CUT FOR SPEED SAKE
+
+    -F
+            append indicator (one of */=>@|) to entries
+
+    -g     like -l, but do not list owner
+
+    -G
+            in a long listing, don't print group names
+
+    -h
+            with -l and -s, print sizes like 1K 234M 2G etc.
+
+
+    -H
+            follow symbolic links listed on the command line
+
+    -i
+            print the index number of each file
+
+    -I
+            do not list implied entries matching shell PATTERN
+
+    -k
+            default to 1024-byte blocks for disk usage; used only with -s and per directory totals
+
+    -l     use a long listing format
+
+    -L
+            when showing file information for a symbolic link, show information for the file the link references rather than for the link itself
+
+    -m     fill width with a comma separated list of entries
+            THIS WAS CUT BECAUSE THIS HAS NO EFFECT ON LONG LS
+
+    -n
+            like -l, but list numeric user and group IDs
+
+    -N
+            print entry names without quoting
+
+
+    -o     like -l, but do not list group information
+
+    -p
+            append / indicator to directories
+
+    -q
+            print ? instead of nongraphic characters
+
+    -Q
+            enclose entry names in double quotes
+
+    -r
+            reverse order while sorting
+
+    -R
+            list subdirectories recursively
+            TOO HARD TO IMPLEMENT
+
+    -s
+            print the allocated size of each file, in blocks
+
+    -S     sort by file size, largest first
+
+    -t     sort by time, newest first; see --time
+
+    -T
+
+    -u     with -lt: sort by, and show, access time; with -l: show access time and sort by name; otherwise: sort by access time, newest first
+            CUT FOR SPEED SAKE
+
+    -U     do not sort; list entries in directory order
+            CUT FOR SPEED SAKE
+
+    -v     natural sort of (version) numbers within text
+
+    -w
+            set output width to COLS.  0 means no limit
+
+    -x     list entries by lines instead of by columns
+
+    -X     sort alphabetically by entry extension
+
+    -Z
+            print any security context of each file
+
+    -1     list one file per line.  Avoid '\n' with -q or -b
