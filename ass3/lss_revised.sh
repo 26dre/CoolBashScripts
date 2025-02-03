@@ -13,7 +13,7 @@ ls_param=""
 file_params=()
 
 for arg in "$@"; do 
-    if [["${arg:0:1}" == "-"]]; then 
+    if [[ "${arg:0:1}" == "-" ]]; then 
         ls_param="${arg:1:1}"
     else
         file_params+=("$arg")
