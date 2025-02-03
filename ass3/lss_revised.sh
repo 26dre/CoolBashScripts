@@ -57,7 +57,7 @@ unpack_arguments () {
 
 for arg in "$@"; do
     echo "Arg received: $arg"
-    unpack_arguments $arg
+    unpack_arguments "$arg"
 done
 echo "Options list = ${options_list[@]}"
 # echo "Options list shifted = ${options_list[@]:1}"
