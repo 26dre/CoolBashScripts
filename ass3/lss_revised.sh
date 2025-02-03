@@ -153,8 +153,10 @@ if contains -h ${ls_options[@]}; then
     final_sort_cmd="sort -hk$long_bytes_position"
 fi
 if contains -r ${ls_options[@]}; then
+    echo "Found -r"
     final_sort_cmd="$final_sort_cmd"
 else
+    echo "Did not find -r"
     final_sort_cmd="$final_sort_cmd -r"
 fi
 echo "running $final_ls_cmd | $final_tail_cmd | $final_sort_cmd" 
