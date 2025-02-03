@@ -53,7 +53,13 @@ for arg in $@; do
     unpack_arguments $arg
 done
 echo "Options list = ${options_list[@]}"
+shift $options_list
+echo "Options list shifted = ${options_list[@]}"
 echo "Arguments list = ${file_args_list[@]}"
+
+# determine_options
+# for option in "${options_list[@]}"; do
+
 
 # basic_inputs="a A b B f F L N n 1 x S k" 
 
