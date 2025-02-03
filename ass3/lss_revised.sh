@@ -1,24 +1,53 @@
 #!/bin/bash                                                                                       
 
 long_bytes_position=5; 
-if [[ "$#" == 0 ]]; then 
-    echo "Running LSS command with 0 arguments"
-    ls -l | sort -k$long_bytes_position -nr
+base_ls_cmd="ls -l";
+tail_cmd="tail -n +2";
+base_sort_cmd="sort -nk$long_bytes_position";
+base_sort_cmd_reversed="$base_sort_cmd -r";
 
+# testing
+# echo $base_sort_cmd;
+# echo $base_sort_cmd_reversed;
+
+
+if [[ "$#" == 0 ]]; then 
+    # echo "Running LSS command with 0 arguments"
+    $base_ls_cmd | $tail_cmd | $base_sort_cmd_reversed
 else
 	echo "LSS received $# arguments"
 fi
 
-ls_param=""
-file_params=()
+options_list=()
+file_args_list=()
 
-for arg in "$@"; do 
-    if [[ "${arg:0:1}" == "-" ]]; then 
-        ls_param="${arg:1:1}"
-    else
-        file_params+=("$arg")
+unpack_arguments () { 
+    # takes in one argument and appends to options_list on 1 return status
+    # takes in one argument and appends to file_args_list on 2 return status  
+    # returns error code 99 on any other setup that doesnt work but this shouldn't break
+    arg_to_parse=$1
+    echo $arg_to_parse
+    options_apend_return_code=1
+    file_args_list_append_return_code=2
+    error_exit_code=99
+    if [[ "${arg_to_parse:0:1}" == "-" ]]; then 
+        if [[ "${arg_to_parse:1:1}" == "-" ]]; then 
+            echo "LSS only receives 1 character options, the argument $1 will be skipped for this run of LSS"
+            return $error_exit_code
+        else 
+            for ((i=1; i<"${#arg_to_parse}"; i++)); do
+                next_option="${arg_to_parse:$i:1}"
+            done
+            return $options_apend_return_code
+        fi
+
+    else # we are looking at a file type here
+        file_args_list+=("$arg_to_parse")
+        return $file_args_list_append_return_code
     fi
-done
+}
+echo "Options list = $options_list"
+echo "Arguments list = $file_args_list"
 
 # basic_inputs="a A b B f F L N n 1 x S k" 
 
