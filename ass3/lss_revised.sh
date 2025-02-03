@@ -58,6 +58,7 @@ case "$ls_param" in
         ;;
     -r )
         
+esac
     
     
 
