@@ -37,6 +37,7 @@ unpack_arguments () {
         else 
             for ((i=1; i<"${#arg_to_parse}"; i++)); do
                 next_option="${arg_to_parse:$i:1}"
+                options_list+=($next_option)
             done
             return $options_apend_return_code
         fi
