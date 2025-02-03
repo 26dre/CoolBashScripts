@@ -142,22 +142,22 @@ fi
 # if contains -r ${ls_options[@]};
 final_ls_cmd="$base_ls_cmd ${ls_options[@]} ${file_args_list[@]}" 
 final_tail_cmd="$tail_cmd"  
-final_sort_cmd=$base_sort_cmd_reversed
+final_sort_cmd=$sort -nk$long_bytes_position
 
 
 if contains -h ${ls_options[@]}; then
-    echo "Requires humanity"
+    # echo "Requires humanity"
     final_sort_cmd="sort -hk$long_bytes_position"
 fi
 if contains -r "${ls_options[@]}"; then
-    echo "Found -r"
+    # echo "Found -r"
     final_sort_cmd="$final_sort_cmd"
 else
-    echo "Did not find -r"
+    # echo "Did not find -r"
     final_sort_cmd="$final_sort_cmd -r"
 fi
-echo "running $final_ls_cmd | $final_tail_cmd | $final_sort_cmd" 
-echo "sorting on column number $long_bytes_position"
+# echo "running $final_ls_cmd | $final_tail_cmd | $final_sort_cmd" 
+# echo "sorting on column number $long_bytes_position"
 $final_ls_cmd | $final_tail_cmd | $final_sort_cmd
 
 
