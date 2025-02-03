@@ -45,7 +45,7 @@ unpack_arguments () {
         fi
 
     else # we are looking at a file type here
-        file_args_list+=("$arg_to_parse")
+        file_args_list+=($arg_to_parse)
         return $file_args_list_append_return_code
     fi
 }
