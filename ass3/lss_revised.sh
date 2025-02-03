@@ -116,14 +116,14 @@ deal_with_option () {
             ;;
    esac
 }
-echo "ls_options list = ${ls_options[@]}"
-echo "sort_options list = ${sort_options[@]}"
 
 
 for option in "${options_list[@]}"; do
     deal_with_option $option
-
 done
+
+echo "ls_options list = ${ls_options[@]}"
+echo "sort_options list = ${sort_options[@]}"
 
 
 
