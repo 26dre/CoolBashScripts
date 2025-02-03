@@ -53,8 +53,7 @@ for arg in $@; do
     unpack_arguments $arg
 done
 echo "Options list = ${options_list[@]}"
-shift options_list
-echo "Options list shifted = ${options_list[@]}"
+echo "Options list shifted = ${options_list[@]:1}"
 echo "Arguments list = ${file_args_list[@]}"
 
 # determine_options
