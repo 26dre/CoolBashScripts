@@ -53,11 +53,76 @@ for arg in $@; do
     unpack_arguments $arg
 done
 echo "Options list = ${options_list[@]}"
-echo "Options list shifted = ${options_list[@]:1}"
+# echo "Options list shifted = ${options_list[@]:1}"
 echo "Arguments list = ${file_args_list[@]}"
 
 # determine_options
+contains () {
+    # determines if you can find needle ($1) in a haystack ($2)
+    # returns 1 if contains, returns 0 if not found
+    needle=$1
+    haystack=$2
+    case $needle in 
+        "${haystack[@]}" )
+            return 1
+            ;;
+        * )
+            return 0
+            ;;
+    esac
+}
+show_ascending=0
+ls_options=()
+sort_options=()
+deal_with_option () {
+   option=$1 
+   case $option in 
+        a | A | b | B | c | d | F | H | L | k | l | n | p | q | Q | T | x | 1)
+            ls_options+=("-$option")
+            ;;
+
+        C | f | m | S)
+            echo "$option does not work when long form listing of ls occurs, $option will be skipped in this run of LSS"
+            ;;
+
+        u | t | X )
+            echo "$option does not work as it will have no effect on the final output. $option will be skipped in this run of lss"
+            ;;
+        g | G | o )
+            ((long_bytes_position--))
+            ls_options+=("-$option")
+            ;;
+        i | s | Z )
+            ((long_bytes_position++))
+            ls_options+=("-$option")
+            ;;
+        h )
+            sort_options+=("-$option")
+            ls_options+=("-$option")
+            ;;
+        I )
+            ls_options+=("-$option")
+            ls_options+=("${file_args_list[0]}")
+            file_args_list=("${file_args_list[@]:1}")
+            ;;
+        r )
+            show_ascending=1
+            ;;
+        R )
+            echo "Removed $option because this input is unnecessarily complicated and hard to implement"
+            ;;
+        * )
+            echo "$option is not one of the original ls functions, and was therefore skipped"
+            ;;
+   esac
+ 
+}
+echo "ls_options list = ${ls_options[@]}
+echo "sort_options list = ${sort_options[@]}"
 # for option in "${options_list[@]}"; do
+
+
+
 
 
 # basic_inputs="a A b B f F L N n 1 x S k" 
