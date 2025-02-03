@@ -160,7 +160,7 @@ if contains -h ${ls_options[@]}; then
     echo "Requires humanity"
     final_sort_cmd="sort -hk$long_bytes_position"
 fi
-if contains -r ${ls_options[@]}; then
+if contains -r "${ls_options[@]}"; then
     echo "Found -r"
     final_sort_cmd="$final_sort_cmd"
 else
