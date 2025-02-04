@@ -8,7 +8,9 @@
 # fi
 
 ls_trash() {
+    local i=0
     for file in "$TRASH"/*; do
+        echo "i = $i" 
         [ -e "$file" ] || continue  # Skip if no files exist
 
         # Extract original filename by decoding base64
