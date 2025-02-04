@@ -17,7 +17,7 @@ ls_trash() {
         # Use ls -l to get file details
         file_info=$(ls -l "$file" | awk '{for(i=1; i<NF; i++) printf $i " "; }')
         if [[ -d "$file" ]] ; then 
-            file_info=$(echo "$file_info" | head -n -1)
+            file_info=$(echo "$file_info" | tail -n +2)
         fi
 
 
