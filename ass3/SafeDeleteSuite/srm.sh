@@ -122,7 +122,7 @@ get_files_to_delete () {
         files_to_delete+=("${tmp_files_to_delete[@]}")
     done
 }
-handle_empty_trash_variable
+determine_trash_existence
 echo "${file_args[@]}"
 get_files_to_delete "${file_args[@]}"
 echo "List of files to delete = ${files_to_delete[*]}"
