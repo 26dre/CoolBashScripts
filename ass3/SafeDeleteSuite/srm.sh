@@ -94,14 +94,9 @@ process_file_to_delete () {
     # trash_path=$2
     trash_path=$(echo "$TRASH")
     file_to_del_path=$(readlink -f "$file_to_del")
-
-    
-
-
-    
 }
 
-
+handle_empty_trash_variable
 
 files_to_delete=()
 
