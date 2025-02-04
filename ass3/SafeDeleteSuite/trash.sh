@@ -1,6 +1,6 @@
 #!/bin/bash                                                                                       
 if [[ -d $TRASH ]]; then
-    echo /bin/rm -r "{$TRASH}"/*
+    echo /bin/rm -r "${TRASH}"/*
     # /bin/rm -r "{$TRASH}"/*
     exit 0
 else
