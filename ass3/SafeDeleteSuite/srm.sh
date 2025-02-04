@@ -111,6 +111,15 @@ process_file_to_delete () {
 
     file_full_name="$PWD/$file_to_del"
     echo "Full file name = $file_full_name"
+    if [[ -f "$TRASH/$file_full_name" ]]; then
+        echo "Attempting to srm a file that already exists in trash. Please delete trashed file first"
+        return 1
+    elif [[ -d "$TRASH/$file_full_name" ]]; then
+        echo "Attempting to srm a directory that already exists in trash. Please delete trashed directory first"
+        return 2
+    fi
+    mv "$file_full_name" "$TRASH"
+    return 0
 }
 
 
@@ -125,6 +134,8 @@ get_files_to_delete () {
         # echo "Files to delete = ${files_to_delete[*]}"
         for file in "${tmp_files_to_delete[@]}"; do
             if [[ -f "$file" ]]; then 
+                files_to_delete+=("$file")
+            elif [[ -d "$file" ]]; then
                 files_to_delete+=("$file")
             fi
         done
