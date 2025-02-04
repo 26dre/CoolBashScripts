@@ -92,11 +92,14 @@ determine_trash_existence () {
     trash_path=$(echo "$TRASH")
     if [[ -z "$trash_path" ]] ; then
         echo "TRASH environment variable is not set up. Please set up TRASH variable and .trash/ directory"
+        return 1
     fi
     if [[ -d "$TRASH" ]]; then
         echo "TRASH variable existence confirmed and set up at $TRASH"
+        return 0
     else   
         echo "TRASH variable set up but directory to house trash environment does not exist"
+        return 2
     fi
 }
 
@@ -116,7 +119,6 @@ get_files_to_delete () {
     echo "Running get_files_to_delete with argument: ${files[*]}"
     for file_arg in "${files[@]}"; do
         echo "Expanding argument \"$file_arg\""
-        echo "running ls $file_arg"
         tmp_files_to_delete=($file_arg)
 
         # echo "Files to delete = ${files_to_delete[*]}"
