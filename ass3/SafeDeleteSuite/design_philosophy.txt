@@ -1,0 +1,19 @@
+In designing this problem, my original idea was to create a hard link. Using that hard link 
+I would then delete the file provided but still have a hard link to it therefore saving the file. 
+I began to think a little harder though and decided that this solution was unworkable for one simple reason. 
+This simply doesnt work across partitions. additionally, hard links simply don't work for directories. 
+
+Therefore I put two systems under consideration: A symbolic link and hiding trash system or an mv based trashed system. 
+I decided on the mv based trash system because it makes reopening access to a file considerably easier and restoring its original location is considerably easier. 
+
+How this system works: 
+
+A file "file.txt" for example is chosen for srm
+full_file_path=readlink -f file.txt
+mv "$full_file_path" "$TRASH/$full_file_path" 
+
+**voila** the file is magically gone
+
+the same follows for directories but with realpath instead of realink
+
+
