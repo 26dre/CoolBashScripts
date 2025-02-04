@@ -7,7 +7,7 @@
 #     exit 1
 # fi
 
-ls_trash() {
+ls_trash () {
     local i=0
     for file in "$TRASH"/*; do
         ((i++))
@@ -17,16 +17,13 @@ ls_trash() {
         # Extract original filename by decoding base64
         decoded_name=$(basename "$file" | base64 --decode 2>/dev/null)
 
-        # Use ls -l to get file details
-        file_info=$(ls -l "$file" | awk '{for(i=1; i<NF; i++) printf $i " "; }')
-        if [[ -d "$file" ]] ; then 
-            file_info=$(echo "$file_info" | tail -n +2)
-        fi
-
+        # Use ls -ld to get file details for directories and files
+        file_info=$(ls -ld "$file" | awk '{for(i=1; i<NF; i++) printf $i " "; }')
 
         # Print ls output with decoded filename
         printf "%s %s\n" "$file_info" "$decoded_name"
-    done
+
+    done  
 }
 
 ls_trash

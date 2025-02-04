@@ -58,6 +58,7 @@ process_file_to_return () {
     file_to_return=$1
 
     file_full_name="$PWD/$file_to_return"
+    encoded_file_name=$(echo -n "$file_full_name" | base64)
     directory_to_return_to=$(dirname "$file_full_name")
     echo "Full file name = $file_full_name"
     if [[ -z "$directory_to_return_to" ]]; then
