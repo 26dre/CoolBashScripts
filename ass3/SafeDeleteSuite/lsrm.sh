@@ -1,6 +1,5 @@
 #!/bin/bash                                                                                       
 if [[ -d $TRASH ]]; then
-
     ls -lR "$TRASH"
     exit 0
 else
