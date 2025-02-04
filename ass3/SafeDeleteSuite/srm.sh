@@ -100,7 +100,7 @@ files_to_delete=()
 get_files_to_delete () { 
     local file_args=("$1")
     for file in "${file_args[@]}"; do
-        echo "Expanding argument $arg"
+        echo "Expanding argument \"$arg\""
         tmp_files_to_delete=(ls "$file")
         echo "$(ls $file)"
         echo "Files to delete = ${files_to_delete[*]}"
