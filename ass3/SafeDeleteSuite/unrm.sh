@@ -98,6 +98,7 @@ get_files_to_unremove () {
 }
 
 get_files_to_unremove "${file_args[@]}"
+echo "get files to remove = ${get_files_to_unremove[*]}"
 for file in "${files_to_unremove[@]}"; do 
     process_file_to_return "$file"
 done
