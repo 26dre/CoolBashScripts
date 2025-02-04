@@ -15,7 +15,9 @@ ls_trash () {
         [ -e "$file" ] || continue  # Skip if no files exist
 
         # Extract original filename by decoding base64
+        
         decoded_name=$(basename "$file" | base64 --decode 2>/dev/null)
+        echo "Base name = $(basename "$file")"
 
         # Use ls -ld to get file details for directories and files
         file_info=$(ls -ld "$file" | awk '{for(i=1; i<NF; i++) printf $i " "; }')
