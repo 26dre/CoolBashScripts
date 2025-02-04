@@ -70,7 +70,7 @@ process_file_to_return () {
         echo "Attempting to restore a directory that already exists in current folder. Please delete current directory before restoring"
         return 2
     elif [[ -f "$TRASH/$file_full_name" || -d  "$TRASH/$file_full_name" ]]; then
-        mv "$TRASH/$file_full_name" "$TRASH"
+        mv "$TRASH/$file_full_name" "$directory_to_return_to"
         return 0
     fi
 }
