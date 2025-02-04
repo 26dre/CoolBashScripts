@@ -71,8 +71,9 @@ process_file_to_return () {
         echo "Attempting to restore a directory that already exists in current folder. Please delete current directory before restoring"
         return 2
     elif [[ -f "$TRASH/$file_full_name" || -d  "$TRASH/$file_full_name" ]]; then
-        mv "$TRASH/$encoded_file_name" "$directory_to_return_to"
-        mv "$directory_to_return_to/$encoded_file_name" "$(basename "$file_full_name")"
+        echo "Getting to this unremoval step"
+        # mv "$TRASH/$encoded_file_name" "$directory_to_return_to"
+        # mv "$directory_to_return_to/$encoded_file_name" "$(basename "$file_full_name")"
         return 0
     fi
 }
