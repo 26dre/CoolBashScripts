@@ -103,9 +103,10 @@ get_files_to_delete () {
         echo "Expanding argument \"$arg\""
         echo "running ls $file"
         tmp_files_to_delete=$(ls "$file")
-        echo "$(ls $file)"
+        echo "$(ls "$file")"
         echo "Files to delete = ${files_to_delete[*]}"
         files_to_delete+=("${tmp_files_to_delete[@]}")
+
     done
 }
 # handle_empty_trash_variable
