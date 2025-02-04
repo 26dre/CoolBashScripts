@@ -11,7 +11,7 @@ unpack_arguments () {
     # takes in one argument and appends to file_args_list on 2 return status  
     # returns error code 99 on any other setup that doesnt work but this shouldn't break
     arg_to_parse=$1
-    # echo $arg_to_parse
+    echo "running unpack_arguments with $arg_to_parse"
     options_append_return_code=1
     file_args_list_append_return_code=2
     error_exit_code=99
@@ -32,6 +32,7 @@ unpack_arguments () {
         return $file_args_list_append_return_code
     fi
 }
+echo "Resulting file_args = ${file_args[*]}"
 
 for arg in "$@"; do
     unpack_arguments "$arg"
