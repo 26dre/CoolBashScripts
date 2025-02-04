@@ -89,6 +89,7 @@ setup_user_trash () {
 # }
 
 determine_trash_existence () { 
+    echo $TRASH
     if [[ -z "$TRASH" ]] ; then
         echo "TRASH environment variable is not set up. Please set up TRASH variable and .trash/ directory"
         return 1
