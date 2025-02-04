@@ -141,7 +141,7 @@ get_files_to_delete () {
         done
     done
 }
-if [[ ! determine_trash_existence ]] ; then 
+if [[ ! $determine_trash_existence ]] ; then 
     echo "could not find trash. exiting now"
     exit 1
 fi
