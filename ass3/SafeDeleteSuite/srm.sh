@@ -76,7 +76,7 @@ handle_empty_trash_variable () {
         echo "May a TRASH variable be set up for you? (y/n)"
         user_in=""
         read user_in
-        user_in=$(echo "$user_in" | tr '[:upper]' '[:lower]')
+        user_in="$(echo "$user_in" | tr '[:upper]' '[:lower]')"
         echo "user_in = $user_in"
         if [[ "$user_in" == "y" ]]; then 
             setup_user_trash
