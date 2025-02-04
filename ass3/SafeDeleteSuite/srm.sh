@@ -114,12 +114,18 @@ files_to_delete=()
 get_files_to_delete () { 
     local files=("$@")
     echo "Running get_files_to_delete with argument: ${files[*]}"
-    for file in "${files[@]}"; do
-        echo "Expanding argument \"$file\""
-        echo "running ls $file"
-        tmp_files_to_delete=("$file")
+    for file_arg in "${files[@]}"; do
+        echo "Expanding argument \"$file_arg\""
+        echo "running ls $file_arg"
+        tmp_files_to_delete=("$file_arg")
+
         echo "Files to delete = ${files_to_delete[*]}"
-        files_to_delete+=("${tmp_files_to_delete[@]}")
+        for file in "${tmp_files_to_delete[@]}"; do
+            if [[ -f "$file" ]]; then 
+                files_to_delete+=("$file")
+            fi
+        done
+        
     done
 }
 determine_trash_existence
