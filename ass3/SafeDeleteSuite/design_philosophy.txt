@@ -8,6 +8,9 @@ I decided on the mv based trash system because it makes reopening access to a fi
 
 How this system works: 
 
+
+srm
+
 A file "file.txt" for example is chosen for srm
 full_file_path=readlink -f file.txt
 mv "$full_file_path" "$TRASH/$full_file_path" 
@@ -15,5 +18,21 @@ mv "$full_file_path" "$TRASH/$full_file_path"
 **voila** the file is magically gone
 
 the same follows for directories but with realpath instead of realink
+
+unsrm
+
+a file "file.txt" is chosen for srm
+full_file_path=$(pwd "file.txt")
+confirm file exists in trash
+if file exists
+mv TRASH + $full_file_path $full_file_path
+
+lsrm
+
+ls -l $TRASH
+
+du
+
+
 
 
