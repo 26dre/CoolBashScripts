@@ -109,7 +109,6 @@ determine_trash_existence () {
 process_file_to_delete () {
     file_to_del=$1
 
-    echo "TRASH = $TRASH"
     file_full_name="$PWD/$file_to_del"
     echo "Full file name = $file_full_name"
     if [[ -f "$TRASH/$file_full_name" ]]; then
@@ -142,7 +141,10 @@ get_files_to_delete () {
         done
     done
 }
-determine_trash_existence
+if [[ ! determine_trash_existence ]] ; then 
+    echo "could not find trash. exiting now"
+    exit 1
+fi
 echo "${file_args[@]}"
 get_files_to_delete "${file_args[@]}"
 echo "List of files to delete = ${files_to_delete[*]}"
