@@ -84,13 +84,14 @@ get_files_to_unremove () {
     echo "Running get_files_to_delete with argument: ${files[*]}"
     for file_arg in "${files[@]}"; do
         echo "Expanding argument \"$file_arg\""
-        tmp_files_to_delete=($file_arg)
+        tmp_files_to_unrm=($file_arg)
 
         # echo "Files to delete = ${files_to_delete[*]}"
-        for file in "${tmp_files_to_delete[@]}"; do
-            if [[ -f "$file" ]]; then 
+        for file in "${tmp_files_to_unrm[@]}"; do
+            encoded_file_name=$(echo -n "$PWD/$file_arg" | base64)
+            if [[ -f "$TRASH/$encoded_file_name" ]]; then 
                 files_to_unremove+=("$file")
-            elif [[ -d "$file" ]]; then
+            elif [[ -d "$TRASH/$encoded_file_name" ]]; then
                 files_to_unremove+=("$file")
             fi
         done
@@ -98,7 +99,7 @@ get_files_to_unremove () {
 }
 
 get_files_to_unremove "${file_args[@]}"
-echo "get files to remove = ${get_files_to_unremove[*]}"
+echo "get files to remove = ${files_to_unremove[*]}"
 for file in "${files_to_unremove[@]}"; do 
     process_file_to_return "$file"
 done
