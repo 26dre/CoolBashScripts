@@ -119,6 +119,7 @@ process_file_to_delete () {
         echo "Attempting to srm a directory that already exists in trash. Please delete trashed directory first"
         return 2
     fi
+    mv "$file_full_name" "$encoded_file_name"
     mv "$encoded_file_name" "$TRASH"
     return 0
 }
