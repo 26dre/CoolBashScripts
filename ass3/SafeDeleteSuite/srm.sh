@@ -64,7 +64,7 @@ setup_user_trash () {
     echo "Found existing config file $existing_config_file"
     
     # mkdir ~/.trash
-    # echo "TRASH=~/.trash" >> "$existing_config_file" 
+    # echo "export TRASH=~/.trash" >> "$existing_config_file" 
     # # shellcheck source=/dev/null
     # source "$existing_config_file"
 }
@@ -77,6 +77,7 @@ handle_empty_trash_variable () {
         user_in=""
         read user_in
         user_in=$(echo "$user_in" | tr '[:upper]' '[:lower]')
+        echo "user_in = $user_in"
         if [[ "$user_in" == "y" ]]; then 
             setup_user_trash
         else
