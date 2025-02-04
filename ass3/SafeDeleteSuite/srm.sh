@@ -110,7 +110,7 @@ get_files_to_delete () {
 }
 # handle_empty_trash_variable
 get_files_to_delete "${file_args[@]}"
-echo "${files_to_delete[@]}"
+echo "List of files to delete = ${files_to_delete[*]}"
 
 
 
