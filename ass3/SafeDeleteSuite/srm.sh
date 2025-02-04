@@ -108,8 +108,9 @@ determine_trash_existence () {
 
 process_file_to_delete () {
     file_to_del=$1
-    # trash_path=$2
-    # trash_path=$(echo "$TRASH")
+
+    file_full_name="$PWD/$file_to_del"
+    echo "Full file name = $file_full_name"
 }
 
 
@@ -133,6 +134,11 @@ determine_trash_existence
 echo "${file_args[@]}"
 get_files_to_delete "${file_args[@]}"
 echo "List of files to delete = ${files_to_delete[*]}"
+
+for file_to_del in "${files_to_delete[@]}"; do
+    process_file_to_delete "$file_to_del"
+done
+
 
 
 
