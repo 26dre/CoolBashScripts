@@ -42,7 +42,7 @@ for arg in "$@"; do
 done
 echo "Resulting file_args = ${file_args[*]}"
 
-if [[ ${#options[@]} != 0 ]] ; then
+if [[ ${#options[@]} -gt 0 ]] ; then
     echo "Running rm with $*"
     rm "$@"
 fi
@@ -68,24 +68,36 @@ setup_user_trash () {
     # # shellcheck source=/dev/null
     # source "$existing_config_file"
 }
-handle_empty_trash_variable () {
+# handle_empty_trash_variable () {
 
-    trash_path=$(echo "$TRASH")
-    if [[ -z "$trash_path" ]]; then
-        echo "You have an empty TRASH variable"
-        echo "May a TRASH variable be set up for you? (y/n)"
-        user_in=""
-        read user_in
-        user_in=$(echo "$user_in" | tr '[:upper:]' '[:lower:]')
-        echo "user_in = $user_in"
-        if [[ "$user_in" == "y" ]]; then 
-            setup_user_trash
-        else
-            echo "Terminating this run of $curr_program, no TRASH path declared"
-            return 1
-        fi
-    fi
+#     trash_path=$(echo "$TRASH")
+#     if [[ -z "$trash_path" ]]; then
+#         echo "You have an empty TRASH variable"
+#         echo "May a TRASH variable be set up for you? (y/n)"
+#         user_in=""
+#         read user_in
+#         user_in=$(echo "$user_in" | tr '[:upper:]' '[:lower:]')
+#         echo "user_in = $user_in"
+#         if [[ "$user_in" == "y" ]]; then 
+#             setup_user_trash
+#         else
+#             echo "Terminating this run of $curr_program, no TRASH path declared"
+#             return 1
+#         fi
+#     fi
     
+# }
+
+determine_trash_existence () { 
+    trash_path=$(echo "$TRASH")
+    if [[ -z "$trash_path" ]] ; then
+        echo "TRASH environment variable is not set up. Please set up TRASH variable and .trash/ directory"
+    fi
+    if [[ -d "$TRASH" ]]; then
+        echo "TRASH variable existence confirmed and set up at $TRASH"
+    else   
+        echo "TRASH variable set up but directory to house trash environment does not exist"
+    fi
 }
 
 
