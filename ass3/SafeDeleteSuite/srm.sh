@@ -89,8 +89,7 @@ setup_user_trash () {
 # }
 
 determine_trash_existence () { 
-    trash_path=$(echo "$TRASH")
-    if [[ -z "$trash_path" ]] ; then
+    if [[ -z "$TRASH" ]] ; then
         echo "TRASH environment variable is not set up. Please set up TRASH variable and .trash/ directory"
         return 1
     fi
@@ -142,7 +141,7 @@ get_files_to_delete () {
     done
 }
 if [[ ! $determine_trash_existence ]] ; then 
-    echo "could not find trash. exiting now"
+    echo "Could not find trash. Exiting now"
     exit 1
 fi
 echo "${file_args[@]}"
