@@ -11,28 +11,26 @@ How this system works:
 
 srm
 
-A file "file.txt" for example is chosen for srm
-full_file_path=readlink -f file.txt
-mv "$full_file_path" "$TRASH/$full_file_path" 
+encode a file name in base64 (this took some googling to figure out ngl) and change the file name to that base64 encoding
+mv that encoded file path into the trash can
 
-**voila** the file is magically gone
+unrm
 
-the same follows for directories but with realpath instead of realink
-
-unsrm
-
-a file "file.txt" is chosen for srm
-full_file_path=$(pwd "file.txt")
-confirm file exists in trash
-if file exists
-mv TRASH + $full_file_path $full_file_path
+encode the requested to see if it exists in the bin first
+if it exists then transfer that file over to the requested directory
+rename it back to the decoded base64
 
 lsrm
 
-ls -l $TRASH
+run ls -l on all files (including directories) in trash but don't operate on the last argument of -l (the name) 
+replace that with the decoded using printf, continue on with your life 
 
-du
+durm
 
+works much the same way as lsrm
 
+trash
 
-
+the easiest of them all
+/bin/rm -rf $TRASH
+oh why can't all functions be this easy

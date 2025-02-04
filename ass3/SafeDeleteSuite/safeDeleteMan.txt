@@ -1,0 +1,33 @@
+srm - safe delete a list of files into your $TRASH
+
+srm [FILE]
+
+no options accepted. Take in any number of files or pattern matching and delete all those that match the pattern. 
+Sends all those files over to the TRASH bin (heretofore referred to as the trash, trash bin, or trash can). 
+
+unrm - safely un remove a list of files from your trash 
+
+unrm [FILE]
+
+no options accepted. Take in any number of files or pattern matching and unremove all those that match the pattern. 
+Sends all those files over from the TRASH bin over to the requeusted folder (works in such a way that it takes into accound cwd)
+
+lsrm - list files in the trash bin 
+
+lsrm 
+
+no options or files accepted. Lists the files currently in the trash can. 
+
+durm - show how much space the trash can is taking on disk
+
+durm 
+
+no options or files accepted. Shows in a human readable way how much each file is taking up on the disk
+
+trash - delete the trash can
+
+trash
+
+no options accepted. deletes the files from memory in the same way that rm does. also acts recursively
+
+
