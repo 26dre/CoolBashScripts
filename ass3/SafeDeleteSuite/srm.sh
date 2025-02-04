@@ -32,7 +32,6 @@ unpack_arguments () {
         return $file_args_list_append_return_code
     fi
 }
-echo "Resulting file_args = ${file_args[*]}"
 
 for arg in "$@"; do
     unpack_arguments "$arg"
@@ -41,6 +40,7 @@ for arg in "$@"; do
         echo "Continuing run without $arg"
     fi
 done
+echo "Resulting file_args = ${file_args[*]}"
 
 if [[ ${#options[@]} != 0 ]] ; then
     echo "Running rm with $*"
