@@ -92,15 +92,24 @@ handle_empty_trash_variable () {
 process_file_to_delete () {
     file_to_del=$1
     # trash_path=$2
-    trash_path=$(echo "$TRASH")
-    file_to_del_path=$(readlink -f "$file_to_del")
+    # trash_path=$(echo "$TRASH")
 }
 
-handle_empty_trash_variable
 
 files_to_delete=()
+get_files_to_delete () { 
+    local file_args=("$1")
+    for file in "${file_args[@]}"; do
+        echo "Expanding argument $arg"
+        tmp_files_to_delete=("ls $file")
+        echo "Files to delete = ${files_to_delete[*]}"
+        files_to_delete+=("${tmp_files_to_delete[@]}")
+    done
+}
+handle_empty_trash_variable
+get_files_to_delete "${file_args[@]}"
+echo files_to_delete
 
-for file_arg in "${file_args[@]}"; do
-    echo "Processing $file_arg"
-done
+
+
 
