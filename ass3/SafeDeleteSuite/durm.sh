@@ -1,4 +1,5 @@
 du_trash () {
+    du
     for file in "$TRASH"/*; do
         [ -e "$file" ] || continue  
 
@@ -6,7 +7,6 @@ du_trash () {
         
         decoded_name=$(basename "$file" | base64 --decode 2>/dev/null)
 
-        du
         file_info=$(du -h "$file" | awk '{for(i=1; i<NF; i++) printf $i " "; }')
 
         printf "%s%s\n" "$file_info" "$decoded_name"
