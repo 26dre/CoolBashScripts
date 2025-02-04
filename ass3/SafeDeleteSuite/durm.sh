@@ -14,8 +14,6 @@ du_trash () {
     done  
 }
 
-ls_trash
-
 if [[ -d $TRASH ]]; then
     du_trash 
     exit 0
