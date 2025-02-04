@@ -99,6 +99,7 @@ process_file_to_delete () {
 files_to_delete=()
 get_files_to_delete () { 
     local file_args=("$1")
+    echo "Running get_files_to_delete with argument: ${file_args[*]}"
     for file in "${file_args[@]}"; do
         echo "Expanding argument \"$file\""
         echo "running ls $file"
