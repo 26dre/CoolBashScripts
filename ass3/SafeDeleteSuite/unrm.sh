@@ -70,10 +70,10 @@ process_file_to_return () {
     elif [[ -d "$TRASH/$file_full_name" ]]; then
         echo "Attempting to restore a directory that already exists in current folder. Please delete current directory before restoring"
         return 2
-    elif [[ -f "$TRASH/$file_full_name" || -d  "$TRASH/$file_full_name" ]]; then
+    elif [[ -f "$TRASH/$encoded_file_name" || -d  "$TRASH/$encoded_file_name" ]]; then
         echo "Getting to this unremoval step"
-        # mv "$TRASH/$encoded_file_name" "$directory_to_return_to"
-        # mv "$directory_to_return_to/$encoded_file_name" "$(basename "$file_full_name")"
+        mv "$TRASH/$encoded_file_name" "$directory_to_return_to"
+        mv "$directory_to_return_to/$encoded_file_name" "$(basename "$file_full_name")"
         return 0
     fi
 }
@@ -99,7 +99,7 @@ get_files_to_unremove () {
 }
 
 get_files_to_unremove "${file_args[@]}"
-echo "get files to remove = ${files_to_unremove[*]}"
+echo "get files to unremove = ${files_to_unremove[*]}"
 for file in "${files_to_unremove[@]}"; do 
     process_file_to_return "$file"
 done
