@@ -3,6 +3,22 @@
 if [[ "$#" == 0  ]] ; then 
     echo "Ran srm with 0 arguments"
 fi
+
+determine_trash_existence () { 
+    echo "TRASH = $TRASH"
+    if [[ -z "$TRASH" ]] ; then
+        echo "TRASH environment variable is not set up. Please set up TRASH variable and .trash/ directory"
+        return 1
+    fi
+    if [[ -d "$TRASH" ]]; then
+        echo "TRASH variable existence confirmed and set up at $TRASH"
+        return 0
+    else   
+        echo "TRASH variable set up but directory to house trash environment does not exist"
+        return 2
+    fi
+}
+determine_trash_existence 
 curr_program="srm"
 options=()
 file_args=()
@@ -47,61 +63,8 @@ if [[ ${#options[@]} -gt 0 ]] ; then
     rm "$@"
 fi
 
-setup_user_trash () {
-    echo "Setting up user TRASH variable"
-    # save_cwd=$(pwd)
-    echo "Checking out HOME directory ( $HOME )"
-    # ls $HOME | grep 
-    existing_config_file=""
-    if [[ -f "$HOME/.bash_profile" ]] ; then 
-        existing_config_file="$HOME/.bash_profile" 
-    elif [[ -f "$HOME/.bashrc" ]] ; then 
-        existing_config_file="$HOME/.bashrc" 
-    elif [[ -f "$HOME/.profile" ]]; then
-        existing_config_file="$HOME/.profile" 
-    fi
 
-    echo "Found existing config file $existing_config_file"
-    
-    # mkdir ~/.trash
-    # echo "export TRASH=~/.trash" >> "$existing_config_file" 
-    # # shellcheck source=/dev/null
-    # source "$existing_config_file"
-}
-# handle_empty_trash_variable () {
 
-#     trash_path=$(echo "$TRASH")
-#     if [[ -z "$trash_path" ]]; then
-#         echo "You have an empty TRASH variable"
-#         echo "May a TRASH variable be set up for you? (y/n)"
-#         user_in=""
-#         read user_in
-#         user_in=$(echo "$user_in" | tr '[:upper:]' '[:lower:]')
-#         echo "user_in = $user_in"
-#         if [[ "$user_in" == "y" ]]; then 
-#             setup_user_trash
-#         else
-#             echo "Terminating this run of $curr_program, no TRASH path declared"
-#             return 1
-#         fi
-#     fi
-    
-# }
-
-determine_trash_existence () { 
-    echo "TRASH = $TRASH"
-    if [[ -z "$TRASH" ]] ; then
-        echo "TRASH environment variable is not set up. Please set up TRASH variable and .trash/ directory"
-        return 1
-    fi
-    if [[ -d "$TRASH" ]]; then
-        echo "TRASH variable existence confirmed and set up at $TRASH"
-        return 0
-    else   
-        echo "TRASH variable set up but directory to house trash environment does not exist"
-        return 2
-    fi
-}
 
 
 
@@ -143,7 +106,6 @@ get_files_to_delete () {
         done
     done
 }
-determine_trash_existence 
 if [[ $? != 0 ]] ; then 
     echo "Could not find trash. Exiting now"
     exit 1
