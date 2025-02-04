@@ -19,7 +19,7 @@ ls_trash () {
         file_info=$(ls -ld "$file" | awk '{for(i=1; i<NF; i++) printf $i " "; }')
 
         # Print ls output with decoded filename
-        printf "%s %s\n" "$file_info" "$decoded_name"
+        printf "%s%s\n" "$file_info" "$decoded_name"
 
     done  
 }
