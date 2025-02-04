@@ -15,7 +15,7 @@ ls_trash() {
         decoded_name=$(basename "$file" | base64 --decode 2>/dev/null)
 
         # Use ls -l to get file details
-        file_info=$(ls -l "$file" | awk '{for(i=1; i<NF; i++) printf $i " "; print ""}')
+        file_info=$(ls -l "$file" | awk '{for(i=1; i<NF; i++) printf $i " "; }')
         echo "File info = $file_info"
 
 
