@@ -99,9 +99,9 @@ process_file_to_delete () {
 
 files_to_delete=()
 get_files_to_delete () { 
-    local file_args=("$1")
-    echo "Running get_files_to_delete with argument: ${file_args[*]}"
-    for file in "${file_args[@]}"; do
+    local files=("$1")
+    echo "Running get_files_to_delete with argument: ${files[*]}"
+    for file in "${files[@]}"; do
         echo "Expanding argument \"$file\""
         echo "running ls $file"
         tmp_files_to_delete="$(ls $file)"
@@ -110,6 +110,7 @@ get_files_to_delete () {
     done
 }
 # handle_empty_trash_variable
+echo "${file_args[@]}"
 get_files_to_delete "${file_args[@]}"
 echo "List of files to delete = ${files_to_delete[*]}"
 
