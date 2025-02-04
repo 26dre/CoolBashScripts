@@ -16,7 +16,6 @@ ls_trash() {
 
         # Use ls -l to get file details
         file_info=$(ls -l "$file" | awk '{for(i=1; i<NF; i++) printf $i " "; }')
-        echo "File info = $file_info"
 
 
         # Print ls output with decoded filename
