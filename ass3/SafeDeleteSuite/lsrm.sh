@@ -16,6 +16,7 @@ ls_trash() {
 
         # Use ls -l to get file details
         file_info=$(ls -l "$file" | head -n -1)
+        echo "File info = $file_info"
 
 
         # Print ls output with decoded filename
