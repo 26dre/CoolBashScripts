@@ -119,13 +119,12 @@ get_files_to_delete () {
         echo "running ls $file_arg"
         tmp_files_to_delete=($file_arg)
 
-        echo "Files to delete = ${files_to_delete[*]}"
+        # echo "Files to delete = ${files_to_delete[*]}"
         for file in "${tmp_files_to_delete[@]}"; do
             if [[ -f "$file" ]]; then 
                 files_to_delete+=("$file")
             fi
         done
-        
     done
 }
 determine_trash_existence
