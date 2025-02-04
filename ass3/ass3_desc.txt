@@ -62,13 +62,42 @@
 
 
 
-2.  Some people complain that Unix doesn't have an "un-delete" program.  Write a suite of shell scripts called "srm", "unrm", "lsrm", "durm", and "trash".  "srm" is a "safe" version of "rm" --- rather than actually removing files, it moves them to a safe place; "unrm" un-removes a file if it hasn't been trashed; and "trash" actually removes all files that are currently safe-rm'd, recovering the disk space.  "lsrm" takes no arguments and performs "ls -l" on all files that are currently in the trash, and "durm" runs "du" on the trashcan to let you know how much disk space would be recovered by running "trash".  If "srm" is invoked with a directory, then the entire directory heirarchy should be safe-rm'd.  (But it's not necessary to be able to "unrm" individual files in a srm'd directory; being able to unrm the entire heirarchy, as a whole, is good enough.  In other words, you only need to be able to "unrm" names that were explicitly srm'd.)  Furthermore, if "srm" is called on a path, it is not necessary to remember the entire path; in that case, "unrm" should only work with the current directory.  If "srm" is called with any options, you may simply exec the regular /bin/rm.  "trash", "lsrm", and "durm" take no arguments.  Both "srm" and "unrm" may be called with many arguments, eg "srm *".  (But of course "unrm" won't usually be called with "*" --- why?)
+2.  Some people complain that Unix doesn't have an "un-delete" program.  
+Write a suite of shell scripts called "srm", "unrm", "lsrm", "durm", and "trash".  
+"srm" is a "safe" version of "rm" --- rather than actually removing files, it moves them to a safe place; 
+"unrm" un-removes a file if it hasn't been trashed; and "trash" actually removes all files that are currently safe-rm'd, recovering the disk space.  
+"lsrm" takes no arguments and performs "ls -l" on all files that are currently in the trash, 
+and "durm" runs "du" on the trashcan to let you know how much disk space would be recovered by running "trash".  
+If "srm" is invoked with a directory, then the entire directory heirarchy should be safe-rm'd.  
+(But it's not necessary to be able to "unrm" individual files in a srm'd directory; 
+being able to unrm the entire heirarchy, as a whole, is good enough.  
+In other words, you only need to be able to "unrm" names that were explicitly srm'd.)  
+Furthermore, if "srm" is called on a path, it is not necessary to remember the entire path; 
+in that case, "unrm" should only work with the current directory.  
+If "srm" is called with any options, you may simply exec the regular /bin/rm.  
+"trash", "lsrm", and "durm" take no arguments.  Both "srm" and "unrm" may be called with many arguments, eg "srm *". 
+(But of course "unrm" won't usually be called with "*" --- why?)
 
-        You should try to make them reasonably fast; if an "srm" takes too long, and you are the impatient type (as most programmers are), then you are unlikely to use it regularly.  Thus design is important.  Two obvious possible designs are: (1) have a single, global, safe-rm directory where all srm'd files go; (2) leave srm'd files in the directory in which they lived, but "hide" them somehow.  The design is up to you.  Your mark will depend good design and implementation decisions.  (It is possible to do a good job using either of the above suggested designs, or you can even think of an entirely new one if you want).  You should clearly document each design decision and reasons behind it, and what advantages and disadvantages it has compared to others.
+        You should try to make them reasonably fast; if an "srm" takes too long, and you are the impatient type (as most programmers are), then you are unlikely to use it regularly.  
+        Thus design is important.  Two obvious possible designs are: 
+        (1) have a single, global, safe-rm directory where all srm'd files go; 
+        (2) leave srm'd files in the directory in which they lived, but "hide" them somehow.  The design is up to you.  
+        Your mark will depend good design and implementation decisions. 
+         (It is possible to do a good job using either of the above suggested designs, or you can even think of an entirely new one if you want).  
+         You should clearly document each design decision and reasons behind it, and what advantages and disadvantages it has compared to others.
 
-        Some other things to think about: what do you do if "srm" is called on a filename that is already srm'd?  Does the old srm'd file get trashed?  (For this assignment, that would be OK, but a production version, if you were going to release it to the general Unix community, would probably need versions of srm'd files.)  Comment on any important design decisions (like this one) that you make.  Make sure you think carefully; there are easy ways to do this question, and hard ways.
+        Some other things to think about: what do you do if "srm" is called on a filename that is already srm'd?  
+        Does the old srm'd file get trashed?  
+        (For this assignment, that would be OK, but a production version, if you were going to release it to the general Unix community, 
+        would probably need versions of srm'd files.)  
+        Comment on any important design decisions (like this one) that you make.  
+        Make sure you think carefully; there are easy ways to do this question, and hard ways.
 
-Hints for #2: define an environment valiable (at login time, in your .login or .profile) called TRASH which tells the scripts where to find the trashcan(s);think about how this variable would need to be changed if somebody else ran them; the scripts should fail gracefully if TRASH is not defined; think about how they would work (or fail) if the trashcan resides on a different partition than the files being srm'd (especially if the file being srm'd is very big).
+Hints for #2: define an environment valiable (at login time, in your .login or .profile) 
+called TRASH which tells the scripts where to find the trashcan(s);
+think about how this variable would need to be changed if somebody else ran them; the scripts should fail gracefully if TRASH is not defined; 
+think about how they would work (or fail) if the trashcan resides on a different partition than the files being srm'd 
+(especially if the file being srm'd is very big).
 
 Notes:
 Questions 1 and 2 are worth equal value.

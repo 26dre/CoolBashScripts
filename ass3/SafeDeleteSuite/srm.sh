@@ -70,7 +70,7 @@ setup_user_trash () {
 handle_empty_trash_variable () {
 
     trash_path=$(echo "$TRASH")
-    if [[ ${#trash_path} == 0 ]]; then
+    if [[ -z "$trash_path" ]]; then
         echo "You have an empty TRASH variable"
         echo "May a TRASH variable be set up for you? (y/n)"
         user_in=""

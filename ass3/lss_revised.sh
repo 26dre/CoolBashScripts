@@ -35,7 +35,7 @@ unpack_arguments () {
         else 
             for ((i=1; i<"${#arg_to_parse}"; i++)); do
                 next_option="${arg_to_parse:$i:1}"
-                options_list+=($next_option)
+                options_list+=("$next_option")
             done
             return $options_apend_return_code
         fi
@@ -117,7 +117,7 @@ deal_with_option () {
 
 
 for option in "${options_list[@]}"; do
-    deal_with_option $option
+    deal_with_option "$option"
 done
 
 # echo "ls_options list = ${ls_options[@]}"
@@ -125,16 +125,16 @@ done
 # echo "arguments list = ${file_args_list[@]}"
 
 
-if contains -o ${ls_options[@]} || contains -G ${ls_options[@]} || contains -g ${ls_options[@]}; then
+if contains -o "${ls_options[@]}" || contains -G "${ls_options[@]}" || contains -g "${ls_options[@]}"; then
     # echo "Contains -o or -g or -G"
     base_ls_cmd="ls"
 fi
 
-final_ls_cmd="$base_ls_cmd ${ls_options[@]} ${file_args_list[@]}" 
+final_ls_cmd="$base_ls_cmd ${ls_options[*]} ${file_args_list[*]}" 
 final_tail_cmd="$tail_cmd"  
 final_sort_cmd="sort -nk$long_bytes_position";
 
-if contains -h ${ls_options[@]}; then
+if contains -h "${ls_options[@]}"; then
     # echo "Requires humanity"
     final_sort_cmd="sort -hk$long_bytes_position"
 fi
