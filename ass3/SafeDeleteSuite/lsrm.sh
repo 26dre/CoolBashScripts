@@ -15,10 +15,10 @@ ls_trash() {
         decoded_name=$(basename "$file" | base64 --decode 2>/dev/null)
 
         # Use ls -l to get file details
-        file_info=$(ls -l "$file")
+        ls -l "$file"
 
         # Print ls output with decoded filename
-        printf "%s -> %s\n" "$file_info" "$decoded_name"
+        # printf "%s -> %s\n" "$file_info" "$decoded_name"
     done
 }
 
