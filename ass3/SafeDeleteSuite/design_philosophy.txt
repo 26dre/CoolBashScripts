@@ -6,6 +6,15 @@ This simply doesnt work across partitions. additionally, hard links simply don't
 Therefore I put two systems under consideration: A symbolic link and hiding trash system or an mv based trashed system. 
 I decided on the mv based trash system because it makes reopening access to a file considerably easier and restoring its original location is considerably easier. 
 
+So, truthfully, I got told that I did not read the instructions in a very harsh way. 
+After describing my base64 encoding as a way to run the code to my friend Dillon (also in the class), he stared at me confused. 
+"We don't need to follow the path back" he said. "EGADS!", said I (granted I used a different exclamation that may not be the most appropriate)
+I had overengineered something I had already completed. Because I had not read the instructions. That's on me but...dammit. Oh well. 
+Now my solution works in such a way that you only get to srm and unrm from the same path. The file / directory is restored to exactly where it came from. 
+Did that simple change take me an extra 2 - 3 hours to implement in all my googling of how to save path information etc? Yes. 
+Does it now work in a way that is kinda cool? Also yes. If need be I will also provide a solution that is much more simple 
+(all the logic is already implemented, a few lines would just neeed to be deleted / moved around)
+
 How this system works: 
 
 
