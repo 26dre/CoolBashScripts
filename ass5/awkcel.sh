@@ -13,27 +13,30 @@
 # Upon each line of input, values can be accessed using the name defined in the HEADER.
 # For fun I may add a little if statement depending on the type of file but that is not relevant for this assignment
 
-delimiter="\t"
-awk_program="$1"
+DELIMITER="\t"
+AWK_PROGRAM="$1"
 FILENAME="$2"
 
 
 
-echo "Awk program = $awk_program"
-ehco "FILENAME = $FILENAME"
+echo "Awk program = $AWK_PROGRAM"
+echo "FILENAME = $FILENAME"
 
 # AWK_VAR_DECLS is declared such that you can add to a string and set those values in awk
 # the assumption is that the number of fields is relatively small therefore passing them in is not all that complicated
 
 
-AWK_VAR_DECLS=""
 
-function interpret_first_line() {
+interpret_first_line () {
     echo "Interpreting the first line to set the field values..."
-    AWK_VAR_DECLS=$(awk -F'\t' 'NR == 1 { for (i = 1; i <= NF; i++) printf "%s=$%d ", $i, i }' "$FILENAME")
+    AWK_VAR_DECLS=$(awk -F'\t' 'NR == 1 { for (i = 1; i <= NF; i++) printf "-v %s=$%d ", $i, i }' "$FILENAME")
     echo "Var declarations = $AWK_VAR_DECLS"
 }
 
 interpret_first_line
+echo "Variable declarations $AWK_VAR_DECLS"
+AWK_CMD_TO_RUN="awk $AWK_VAR_DECLS -F$DELIMITER '$AWK_PROGRAM' $FILENAME"
+echo "$AWK_CMD_TO_RUN"
+# awk $AWK_VAR_DECLS -F"$DELIMITER" "'$AWK_PROGRAM'" "$FILENAME"
 
-awk -F"$delimiter" "$awk_program" "$AWK_VAR_DECLS" "$FILENAME"
+$AWK_CMD_TO_RUN="awk $AWK_VAR_DECLS -F$DELIMITER '$AWK_PROGRAM' $FILENAME"
