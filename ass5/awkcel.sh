@@ -39,4 +39,4 @@ echo "Variable declarations $AWK_VAR_DECLS"
 # echo "$AWK_CMD_TO_RUN"
 awk $AWK_VAR_DECLS -F"$DELIMITER" 'NR > 1 {$AWK_PROGRAM}' "$FILENAME"
 
-AWK_CMD_TO_RUN
+# AWK_CMD_TO_RUN
