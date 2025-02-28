@@ -1,5 +1,4 @@
 #!/bin/bash
-
 function cleanup()
 {
     rm -rf "${tmp_dir}" 
