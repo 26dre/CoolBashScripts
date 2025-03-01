@@ -37,7 +37,12 @@ interpret_first_line
 echo "Variable declarations $AWK_VAR_DECLS"
 # AWK_CMD_TO_RUN="awk $AWK_VAR_DECLS -F$DELIMITER 'NR > 1 {$AWK_PROGRAM}' $FILENAME"
 # echo "$AWK_CMD_TO_RUN"
-awk $AWK_VAR_DECLS "-F$DELIMITER '$AWK_PROGRAM ' $FILENAME"
-#  awk -F'\t' '$2 == "00000" { print $1, "is the prof" } 
+awk $AWK_VAR_DECLS "-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM ' $FILENAME"
+#  awk -F'\t' 'NR > 1 {$2 == "00000" { print $1, "is the prof" } 
+# $2 != "00000" { print $1, "must be a TA or Reader or Student and got grade", int($3 + 0.5) }}' name-studnum.tsv
+# # AWK_CMD_TO_RUN
+
+# awk -F'\t' 'NR > 1 $2 == "00000" { print $1, "is the prof" } 
 # $2 != "00000" { print $1, "must be a TA or Reader or Student and got grade", int($3 + 0.5) }' name-studnum.tsv
-# AWK_CMD_TO_RUN
+
+# awk -F'\t' 'NR == 1 { next } $1 == "00000" { print $2, "is the prof" } $1 != "00000" { print $2, "must be a TA or Reader or Student and got grade", int($3 + 0.5) }' name-studnum.tsv
