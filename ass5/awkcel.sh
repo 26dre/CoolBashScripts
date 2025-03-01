@@ -37,6 +37,6 @@ interpret_first_line
 echo "Variable declarations $AWK_VAR_DECLS"
 # AWK_CMD_TO_RUN="awk $AWK_VAR_DECLS -F$DELIMITER 'NR > 1 {$AWK_PROGRAM}' $FILENAME"
 # echo "$AWK_CMD_TO_RUN"
-awk "$AWK_VAR_DECLS" -F"$DELIMITER" 'NR > 1 {$AWK_PROGRAM}' "$FILENAME"
+awk $AWK_VAR_DECLS -F"$DELIMITER" 'NR > 1 {$AWK_PROGRAM}' "$FILENAME"
 
 # AWK_CMD_TO_RUN
