@@ -56,7 +56,7 @@ BEGIN {
     for (i = 1; i <= length(combined); i++) {
         printf combined[i] > "/dev/stderr";
     }
-    print ""
+    printf "\n"
     for (i = 1; i <= length(combined); i++) {
         if (combined[i] ~ /^"/) in_quotes = !in_quotes;  
 
