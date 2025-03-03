@@ -69,7 +69,7 @@ BEGIN {
                 }
             }
         } else {
-            printf "NOT replacing \"%s\" with \"$%d\" because in_quotes = 1\n", combined[i]  > "/dev/stderr";  
+            printf "NOT replacing \"%s\" because in_quotes is FALSE\n", combined[i]  ;  
         }
     }
     print "Replaced tokenized input below: "
