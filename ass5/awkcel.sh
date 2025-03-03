@@ -43,9 +43,10 @@ interpret_first_line () {
     # for ((i = 0; i < ${#AWK_VAR_DECLS[@]}; i++)); do
         # AWK_PROGRAM=$(echo "$AWK_PROGRAM" | sed "s|${AWK_VAR_DECLS[$i]}|\$i|g")
     # done
-
+    word_pos=1
     for word in $AWK_VAR_DECLS; do
-        echo "$word"
+        echo "$word relates to $word_pos"
+        ((word_pos++))
     done
     echo "Altered awk program: $AWK_PROGRAM"
 
