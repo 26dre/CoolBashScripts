@@ -70,6 +70,11 @@ BEGIN {
             }
         }
     }
+    print "Replaced tokenized input below: "
+    for (i = 1; i <= length(combined); i++) {
+        printf "%s ", combined[i];
+    }
+    printf "\n";
 }')
 
     echo "Altered awk program: $AWK_PROGRAM"
