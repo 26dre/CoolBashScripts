@@ -54,29 +54,22 @@ BEGIN {
         print "combined[" i "] = " combined[i] > "/dev/stderr";
     }
     print "Tokenized input below: "
-    for (i = 1; i <= length(combined); i++) {
-        printf "%s ", combined[i];
-    }
+    # for (i = 1; i <= length(combined); i++) {
+    #     printf "%s ", combined[i];
+    # }
     printf "\n";
     for (i = 1; i <= length(combined); i++) {
-        if (combined[i] ~ /^"/) in_quotes = !in_quotes;  
-
-        if (!in_quotes) {
-            for (j = 1; j <= length(search); j++) {  
-                if (combined[i] == search[j]) {
-                    printf "Replacing \"%s\" with \"$%d\"\n", combined[i], j > "/dev/stderr";  
-                    combined[i] = "$" j;  
-                }
-            }
+        if (combined[i] ~ /^"/){
+            in_quotes = !in_quotes;  
+        }
+        if (in_quotes) {
+            printf "%s", combined[i];
         } else {
-            printf "NOT replacing \"%s\" because in_quotes is FALSE\n", combined[i]  ;  
+            printf "%s ", combined[i];
         }
     }
-    print "Replaced tokenized input below: "
-    for (i = 1; i <= length(combined); i++) {
-        printf "%s ", combined[i];
-    }
     printf "\n";
+    
 }')
 
     echo "Altered awk program: $AWK_PROGRAM"
@@ -98,3 +91,18 @@ echo "$AWK_CMD_TO_RUN"
 # $2 != "00000" { print $name, "must be a TA or Reader or Student and got grade", int($3 + 0.5) }' name-studnum.tsv
 
 # Want to model things as the command above
+
+
+echo '=="hello world what" && x==y' | awk '{
+    first = 1;
+    while (match($0, /"[^"]*"|[[:alnum:]]+|[^[:alnum:][:space:]]+/, arr)) {
+        if (!first && !(prev == "\"" && arr[0] ~ /^[[:alnum:]]/)) {
+            printf " ";  
+        }
+        printf "%s", arr[0];  # Print the token
+        prev = arr[0];  # Store previous token for next check
+        first = 0;  
+        $0 = substr($0, RSTART + RLENGTH);  # Remove matched token from input
+    }
+    print "";  # Newline at the end
+}'
