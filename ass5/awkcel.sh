@@ -31,7 +31,7 @@ interpret_first_line () {
     echo "Interpreting the first line to set the field values..."
     # AWK_VAR_DECLS=$(awk -F'\t' 'NR == 1 { for (i = 1; i <= NF; i++) printf "-v %s=\"$%d\" ", $i, i }' "$FILENAME")
     AWK_VAR_DECLS=$(awk -F'\t' 'NR == 1 { for (i = 1; i <= NF; i++) printf "%s ", $i }' "$FILENAME")
-    # AWK_VAR_DECLS=${AWK_VAR_DECLS$?%}
+    AWK_VAR_DECLS=${AWK_VAR_DECLS$?%}
     # AWK_VAR_DECLS=$(head -1 "$FILENAME")
 
     # for var in $AWK_VAR_DECLS; do 
