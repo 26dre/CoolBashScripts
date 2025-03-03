@@ -68,6 +68,8 @@ BEGIN {
                     combined[i] = "$" j;  
                 }
             }
+        } else {
+            printf "NOT replacing \"%s\" with \"$%d\" because in_quotes = 1\n", combined[i]  > "/dev/stderr";  
         }
     }
     print "Replaced tokenized input below: "
