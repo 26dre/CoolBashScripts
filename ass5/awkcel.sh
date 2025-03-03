@@ -59,7 +59,7 @@ BEGIN {
     # }
     printf "\n";
     for (i = 1; i <= length(combined); i++) {
-        if (combined[i] ~ /^"/){
+        if (index(combined[i], "\"")){
             in_quotes = !in_quotes;  
         }
         if (in_quotes) {
