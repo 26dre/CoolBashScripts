@@ -42,8 +42,16 @@ BEGIN {
 {
     in_quotes = 0;
     n = split($0, tokens, /([[:space:]]+|[^[:alnum:]_]+)/, seps);  
+    combined_idx = 1;
+    
     for (i = 1; i <= n; i++) {
-        print "tokens[" i "] = " tokens[i];
+        combined[combined_idx++] = tokens[i];
+        if (i < n) {
+            combined[combined_idx++] = seps[i];
+        }
+    }
+    for (i = 1; i <= n; i++) {
+        print "combined[" i "] = " combined[i];
     }
     for (i = 1; i <= n; i++) {
         if (tokens[i] ~ /^"/) in_quotes = !in_quotes;  
