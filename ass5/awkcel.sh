@@ -33,33 +33,28 @@ interpret_first_line () {
     AWK_VAR_DECLS=$(awk -F'\t' 'NR == 1 { for (i = 1; i <= NF; i++) printf "%s ", $i }' "$FILENAME")
 
     AWK_VAR_DECLS="${AWK_VAR_DECLS::-1}"
-    # for var in $AWK_VAR_DECLS; do 
-    #     sed '
-    #     echo var
-    # done
+    
 
-    echo "Var declarations = |$AWK_VAR_DECLS|"
-    # for ((i = 0; i < ${#AWK_VAR_DECLS[@]}; i++)); do
-        # AWK_PROGRAM=$(echo "$AWK_PROGRAM" | sed "s|${AWK_VAR_DECLS[$i]}|\$i|g")
-    # done
-    word_pos=1
-    for word in $AWK_VAR_DECLS; do
-        # echo "$word relates to $word_pos"
-        # # AWK_PROGRAM=$(echo "$AWK_PROGRAM" | sed "s/$word/\$$word_pos/g") 
-        # AWK_PROGRAM=${AWK_PROGRAM//$word/"\$$word_pos"}
-        AWK_PROGRAM=$(echo "$AWK_PROGRAM" | awk -v replacement="\$$word_pos" -v to_replace="$word" '
-        {
-            in_quotes = 0;
-            for (i = 1; i <= NF; i++) {
-                if ($i ~ /^"/) in_quotes = !in_quotes;  # Toggle inside/outside quotes
-                if (!in_quotes && $i == $to_replace) $i = $replacement;
+    AWK_PROGRAM=$(echo "$AWK_PROGRAM" | awk -v s1="$AWK_VAR_DECLS" '
+BEGIN {
+    split(s1, search, " ")  # Convert the space-separated list into an array
+}
+{
+    in_quotes = 0;
+    for (i = 1; i <= NF; i++) {
+        if ($i ~ /^"/) in_quotes = !in_quotes;  
+
+        if (!in_quotes) {
+            for (j = 1; j <= length(search); j++) {  
+                if ($i == search[j]) {
+                    printf "Replacing \"%s\" with \"$%d\"\n", $i, j > "/dev/stderr";  
+                    $i = "$" j;  
+                }
             }
-            print;
         }
-        ')
-        ((word_pos++))
-
-    done
+    }
+    print;
+}')
     echo "Altered awk program: $AWK_PROGRAM"
 
 }
