@@ -45,9 +45,9 @@ interpret_first_line () {
     word_pos=1
     for word in $AWK_VAR_DECLS; do
         echo "$word relates to $word_pos"
-        ((word_pos++))
         # AWK_PROGRAM=$(echo "$AWK_PROGRAM" | sed "s/$word/\$$word_pos/g") 
         AWK_PROGRAM=${AWK_PROGRAM//$word/"\$$word_pos"}
+        ((word_pos++))
     done
     echo "Altered awk program: $AWK_PROGRAM"
 
