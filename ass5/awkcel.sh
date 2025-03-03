@@ -29,20 +29,35 @@ echo "FILENAME = $FILENAME"
 
 interpret_first_line () {
     echo "Interpreting the first line to set the field values..."
-    AWK_VAR_DECLS=$(awk -F'\t' 'NR == 1 { for (i = 1; i <= NF; i++) printf "-v %s=\"$%d\" ", $i, i }' "$FILENAME")
+    # AWK_VAR_DECLS=$(awk -F'\t' 'NR == 1 { for (i = 1; i <= NF; i++) printf "-v %s=\"$%d\" ", $i, i }' "$FILENAME")
+    AWK_VAR_DECLS=$(awk -F'\t' 'NR == 1 { for (i = 1; i <= NF; i++) printf "%s ", $i }' "$FILENAME")
+    # AWK_VAR_DECLS=${AWK_VAR_DECLS$?%}
+    # AWK_VAR_DECLS=$(head -1 "$FILENAME")
+
+    # for var in $AWK_VAR_DECLS; do 
+    #     sed '
+    #     echo var
+    # done
+
     echo "Var declarations = $AWK_VAR_DECLS"
+    for ((i = 0; i < ${#AWK_VAR_DECLS[@]}; i++)); do
+        AWK_PROGRAM=$(echo "$AWK_PROGRAM" | sed "s|${AWK_VAR_DECLS[$i]}|\$i|g")
+    done
+    echo "Altered awk program: $AWK_PROGRAM"
+
 }
 
 interpret_first_line
 echo "Variable declarations $AWK_VAR_DECLS"
-# AWK_CMD_TO_RUN="awk $AWK_VAR_DECLS -F$DELIMITER 'NR > 1 {$AWK_PROGRAM}' $FILENAME"
-# echo "$AWK_CMD_TO_RUN"
-awk $AWK_VAR_DECLS "-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM ' $FILENAME"
+A
+# AWK_CMD_TO_RUN="-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
+awk "-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
 #  awk -F'\t' 'NR > 1 {$2 == "00000" { print $1, "is the prof" } 
 # $2 != "00000" { print $1, "must be a TA or Reader or Student and got grade", int($3 + 0.5) }}' name-studnum.tsv
 # # AWK_CMD_TO_RUN
 
-# awk -F'\t' 'NR > 1 $2 == "00000" { print $1, "is the prof" } 
-# $2 != "00000" { print $1, "must be a TA or Reader or Student and got grade", int($3 + 0.5) }' name-studnum.tsv
 
-# awk -F'\t' 'NR == 1 { next } $1 == "00000" { print $2, "is the prof" } $1 != "00000" { print $2, "must be a TA or Reader or Student and got grade", int($3 + 0.5) }' name-studnum.tsv
+#working command
+#awk -v name=1 -F'\t' 'NR == 1 { next } $2 == "00000" { print $name, "is the prof" } $2 != "00000" { print $name, "must be a TA or Reader or Student and got grade", int($3 + 0.5) }' name-studnum.tsv
+
+# Want to model things as the command above

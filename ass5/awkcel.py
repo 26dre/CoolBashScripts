@@ -2,12 +2,21 @@
 
 
 import sys
+from threading import Lock
 from typing import Callable, Dict, List
 
 
 Position = int
 VariableName = str
 FLUSH_LEN = 1024
+unflushed_chars = 0
+std_out_lock: Lock = Lock()
+
+
+def flush_output():
+    with std_out_lock:
+        sys.stdout.flush()
+        unflushed_chars = 0
 
 
 def parse_first_line(delimited_str: str, delimiter: str) -> Dict[str, Position]:
