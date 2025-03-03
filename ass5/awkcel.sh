@@ -40,8 +40,12 @@ interpret_first_line () {
     # done
 
     echo "Var declarations = $AWK_VAR_DECLS"
-    for ((i = 0; i < ${#AWK_VAR_DECLS[@]}; i++)); do
-        AWK_PROGRAM=$(echo "$AWK_PROGRAM" | sed "s|${AWK_VAR_DECLS[$i]}|\$i|g")
+    # for ((i = 0; i < ${#AWK_VAR_DECLS[@]}; i++)); do
+        # AWK_PROGRAM=$(echo "$AWK_PROGRAM" | sed "s|${AWK_VAR_DECLS[$i]}|\$i|g")
+    # done
+
+    for word in $AWK_VAR_DECLS; do
+        echo "$word"
     done
     echo "Altered awk program: $AWK_PROGRAM"
 
@@ -49,7 +53,6 @@ interpret_first_line () {
 
 interpret_first_line
 echo "Variable declarations $AWK_VAR_DECLS"
-A
 # AWK_CMD_TO_RUN="-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
 awk "-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
 #  awk -F'\t' 'NR > 1 {$2 == "00000" { print $1, "is the prof" } 
