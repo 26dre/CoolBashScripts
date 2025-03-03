@@ -37,26 +37,32 @@ interpret_first_line () {
 
     AWK_PROGRAM=$(echo "$AWK_PROGRAM" | awk -v s1="$AWK_VAR_DECLS" '
 BEGIN {
-    split(s1, search, " ")  # Convert the space-separated list into an array
+    split(s1, search, " ")  
 }
 {
     in_quotes = 0;
-    for (i = 1; i <= NF; i++) {
-        if ($i ~ /^"/) in_quotes = !in_quotes;  
+    n = split($0, tokens, /([[:space:]]+|[^[:alnum:]_]+)/, seps);  
+
+    for (i = 1; i <= n; i++) {
+        if (tokens[i] ~ /^"/) in_quotes = !in_quotes;  
 
         if (!in_quotes) {
             for (j = 1; j <= length(search); j++) {  
-                if ($i == search[j]) {
-                    printf "Replacing \"%s\" with \"$%d\"\n", $i, j > "/dev/stderr";  
-                    $i = "$" j;  
+                if (tokens[i] == search[j]) {
+                    printf "Replacing \"%s\" with \"$%d\"\n", tokens[i], j > "/dev/stderr";  
+                    tokens[i] = "$" j;  
                 }
             }
         }
     }
-    print;
+    
+    
+    for (i = 1; i <= n; i++) {
+        printf "%s", tokens[i] (i < n ? seps[i] : "");
+    }
 }')
-    echo "Altered awk program: $AWK_PROGRAM"
 
+    echo "Altered awk program: $AWK_PROGRAM"
 }
 
 interpret_first_line
