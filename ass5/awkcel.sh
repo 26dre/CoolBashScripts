@@ -53,11 +53,8 @@ BEGIN {
     for (i = 1; i <= length(combined); i++) {
         print "combined[" i "] = " combined[i] > "/dev/stderr";
     }
+    print ""
     print "Tokenized input below: "
-    # for (i = 1; i <= length(combined); i++) {
-    #     printf "%s ", combined[i];
-    # }
-    printf "\n";
     for (i = 1; i <= length(combined); i++) {
         if (index(combined[i], "\"")){
             in_quotes = !in_quotes;  
@@ -93,16 +90,3 @@ echo "$AWK_CMD_TO_RUN"
 # Want to model things as the command above
 
 
-echo '=="hello world what" && x==y' | awk '{
-    first = 1;
-    while (match($0, /"[^"]*"|[[:alnum:]]+|[^[:alnum:][:space:]]+/, arr)) {
-        if (!first && !(prev == "\"" && arr[0] ~ /^[[:alnum:]]/)) {
-            printf " ";  
-        }
-        printf "%s", arr[0];  # Print the token
-        prev = arr[0];  # Store previous token for next check
-        first = 0;  
-        $0 = substr($0, RSTART + RLENGTH);  # Remove matched token from input
-    }
-    print "";  # Newline at the end
-}'
