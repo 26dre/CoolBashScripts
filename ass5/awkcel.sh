@@ -50,17 +50,17 @@ BEGIN {
             combined[combined_idx++] = seps[i];
         }
     }
-    for (i = 1; i <= n; i++) {
-        print "combined[" i "] = " combined[i];
+    for (i = 1; i <= length(combined); i++) {
+        print "combined[" i "] = " combined[i] > "/dev/stderr";
     }
-    for (i = 1; i <= n; i++) {
-        if (tokens[i] ~ /^"/) in_quotes = !in_quotes;  
+    for (i = 1; i <= length(combined); i++) {
+        if (combined[i] ~ /^"/) in_quotes = !in_quotes;  
 
         if (!in_quotes) {
             for (j = 1; j <= length(search); j++) {  
-                if (tokens[i] == search[j]) {
-                    printf "Replacing \"%s\" with \"$%d\"\n", tokens[i], j > "/dev/stderr";  
-                    tokens[i] = "$" j;  
+                if (combined[i] == search[j]) {
+                    printf "Replacing \"%s\" with \"$%d\"\n", combined[i], j > "/dev/stderr";  
+                    combined[i] = "$" j;  
                 }
             }
         }
@@ -68,7 +68,7 @@ BEGIN {
     
     
     for (i = 1; i <= n; i++) {
-        printf "%s", tokens[i] (i < n ? seps[i] : "");
+        printf "%s", combined[i] (i < n ? seps[i] : "");
     }
 }')
 
