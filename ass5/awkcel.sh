@@ -42,8 +42,9 @@ BEGIN {
 {
     in_quotes = 0;
     n = split($0, tokens, /([[:space:]]+|[^[:alnum:]_]+)/, seps);  
-
-    printf "Tokens = ", tokens > "dev/stderr";
+    for (i = 1; i <= n; i++) {
+        print "tokens[" i "] = " tokens[i];
+    }
     for (i = 1; i <= n; i++) {
         if (tokens[i] ~ /^"/) in_quotes = !in_quotes;  
 
