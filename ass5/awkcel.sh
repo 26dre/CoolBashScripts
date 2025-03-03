@@ -44,10 +44,21 @@ interpret_first_line () {
     # done
     word_pos=1
     for word in $AWK_VAR_DECLS; do
-        echo "$word relates to $word_pos"
-        # AWK_PROGRAM=$(echo "$AWK_PROGRAM" | sed "s/$word/\$$word_pos/g") 
-        AWK_PROGRAM=${AWK_PROGRAM//$word/"\$$word_pos"}
+        # echo "$word relates to $word_pos"
+        # # AWK_PROGRAM=$(echo "$AWK_PROGRAM" | sed "s/$word/\$$word_pos/g") 
+        # AWK_PROGRAM=${AWK_PROGRAM//$word/"\$$word_pos"}
+        AWK_PROGRAM=$(echo "$AWK_PROGRAM" | awk -v replacement="\$$word_pos" -v to_replace="$word" '
+        {
+            in_quotes = 0;
+            for (i = 1; i <= NF; i++) {
+                if ($i ~ /^"/) in_quotes = !in_quotes;  # Toggle inside/outside quotes
+                if (!in_quotes && $i == $to_replace) $i = $replacement;
+            }
+            print;
+        }
+        ')
         ((word_pos++))
+
     done
     echo "Altered awk program: $AWK_PROGRAM"
 
@@ -63,7 +74,9 @@ echo "$AWK_CMD_TO_RUN"
 # # AWK_CMD_TO_RUN
 
 
-#working command
-#awk -v name=1 -F'\t' 'NR == 1 { next } $2 == "00000" { print $name, "is the prof" } $2 != "00000" { print $name, "must be a TA or Reader or Student and got grade", int($3 + 0.5) }' name-studnum.tsv
+# working command
+# awk -v name=1 -F'\t' 'NR == 1 { next } 
+# $2 == "00000" { print $name, "is the prof" } 
+# $2 != "00000" { print $name, "must be a TA or Reader or Student and got grade", int($3 + 0.5) }' name-studnum.tsv
 
 # Want to model things as the command above
