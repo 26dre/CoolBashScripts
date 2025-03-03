@@ -54,7 +54,7 @@ BEGIN {
         print "combined[" i "] = " combined[i] > "/dev/stderr";
     }
     for (i = 1; i <= length(combined); i++) {
-        printf "%s" combined[i] > "/dev/stderr";
+        printf combined[i] > "/dev/stderr";
     }
     print ""
     for (i = 1; i <= length(combined); i++) {
