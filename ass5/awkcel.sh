@@ -46,6 +46,8 @@ interpret_first_line () {
     for word in $AWK_VAR_DECLS; do
         echo "$word relates to $word_pos"
         ((word_pos++))
+        # AWK_PROGRAM=$(echo "$AWK_PROGRAM" | sed "s/$word/\$$word_pos/g") 
+        AWK_PROGRAM=${AWK_PROGRAM//$word/"\$$word_pos"}
     done
     echo "Altered awk program: $AWK_PROGRAM"
 
@@ -53,8 +55,9 @@ interpret_first_line () {
 
 interpret_first_line
 echo "Variable declarations $AWK_VAR_DECLS"
-# AWK_CMD_TO_RUN="-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
-awk "-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
+AWK_CMD_TO_RUN="-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
+echo "$AWK_CMD_TO_RUN"
+# awk "-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
 #  awk -F'\t' 'NR > 1 {$2 == "00000" { print $1, "is the prof" } 
 # $2 != "00000" { print $1, "must be a TA or Reader or Student and got grade", int($3 + 0.5) }}' name-studnum.tsv
 # # AWK_CMD_TO_RUN
