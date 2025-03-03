@@ -31,15 +31,14 @@ interpret_first_line () {
     echo "Interpreting the first line to set the field values..."
     # AWK_VAR_DECLS=$(awk -F'\t' 'NR == 1 { for (i = 1; i <= NF; i++) printf "-v %s=\"$%d\" ", $i, i }' "$FILENAME")
     AWK_VAR_DECLS=$(awk -F'\t' 'NR == 1 { for (i = 1; i <= NF; i++) printf "%s ", $i }' "$FILENAME")
-    AWK_VAR_DECLS=${AWK_VAR_DECLS$?%}
-    # AWK_VAR_DECLS=$(head -1 "$FILENAME")
 
+    AWK_VAR_DECLS="${AWK_VAR_DECLS::-1}"
     # for var in $AWK_VAR_DECLS; do 
     #     sed '
     #     echo var
     # done
 
-    echo "Var declarations = $AWK_VAR_DECLS"
+    echo "Var declarations = |$AWK_VAR_DECLS|"
     # for ((i = 0; i < ${#AWK_VAR_DECLS[@]}; i++)); do
         # AWK_PROGRAM=$(echo "$AWK_PROGRAM" | sed "s|${AWK_VAR_DECLS[$i]}|\$i|g")
     # done
