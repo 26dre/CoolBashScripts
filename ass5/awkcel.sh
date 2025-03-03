@@ -53,8 +53,9 @@ BEGIN {
     for (i = 1; i <= length(combined); i++) {
         print "combined[" i "] = " combined[i] > "/dev/stderr";
     }
+    print "Tokenized input below: "
     for (i = 1; i <= length(combined); i++) {
-        printf combined[i] > "/dev/stderr";
+        printf "%s ", combined[i];
     }
     printf "\n";
     for (i = 1; i <= length(combined); i++) {
