@@ -122,6 +122,10 @@ FULL_CMD=$(echo "-F'$DELIMITER'" "'$SKIP_AWK_PROG'" "$FILENAME")
     echo EXCLUDING_FILE_NAME = "$EXCLUDING_FILE_NAME" 
     echo "FULL_CMD = $FULL_CMD"
     echo "WANTED = ""-F'$DELIMITER'" "'$SKIP_AWK_PROG'" "$FILENAME"
+    echo "But what if"
+    echo "awk $FULL_CMD"
+    
+    
     declare -p FULL_CMD
 } >&2
 
