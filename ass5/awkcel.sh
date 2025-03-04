@@ -88,20 +88,20 @@ BEGIN {
         }
     }
     printf "\n";
-    print "Pre processed awk program below: "
+    print "Pre processed awk program below: " >  "/dev/stderr"
     for (i = 1; i <= length(combined); i++) {
         if (index(combined[i], "\"")){
             in_quotes = !in_quotes;  
         }
         if (in_quotes) {
-            printf "%s", combined[i] > "dev/stderr";
+            printf "%s", combined[i] > "/dev/stderr";
         } else {
-            printf "%s ", combined[i] > "dev/stderr";
+            printf "%s ", combined[i] > "/dev/stderr";
         }
     }
-    printf "\n";
+    printf "\nHOLY SHIT DEAR GOD";
     for (i = 1; i <= length(combined); i++) {
-        printf "%s", combined[i] ;
+        printf "%s", combined[i];
     }
     printf "\n";
 }')
