@@ -100,7 +100,8 @@ BEGIN {
         }
     }
     printf "\nHOLY SHIT DEAR GOD\n";
-    for (i = 0; i <= length(combined); i++) {
+    printf "\047"
+    for (i = 1; i <= length(combined); i++) {
         printf "%s", combined[i];
     }
     printf "\n";
