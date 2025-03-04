@@ -112,7 +112,7 @@ BEGIN {
 }
 
 interpret_first_line
-ACTUAL_AWK_PROG=$($AWK_PROGRAM | tail -n 1)
+ACTUAL_AWK_PROG=$($AWK_PROGRAM | tail -n 2)
 echo "AWKPROG = $ACTUAL_AWK_PROG"
 
 # working command
