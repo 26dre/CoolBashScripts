@@ -82,7 +82,7 @@ BEGIN {
             printf "%s", combined[i];
         } else {
             for (j = 1; j < length(search); j++) { 
-                printf "Comparing %s to %s", combined[i], search[j];
+                printf "\tComparing %s to %s\n", combined[i], search[j];
                 if (combined[i] == search[j]) {
                     combined[i] = "$" j; 
                     break;
