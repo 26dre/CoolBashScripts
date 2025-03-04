@@ -123,6 +123,9 @@ FULL_CMD=$(echo "-F'$DELIMITER'" "'$SKIP_AWK_PROG'" "$FILENAME")
     echo "FULL_CMD = $FULL_CMD"
     echo "WANTED = ""-F'$DELIMITER'" "'$SKIP_AWK_PROG'" "$FILENAME"
 } >&2
+
+declare -p "$FULL_CMD"
+
 set -x
 awk "$FULL_CMD"
 set +x 
