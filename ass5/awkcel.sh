@@ -59,27 +59,14 @@ BEGIN {
         print "combined[" i "] = " combined[i] > "/dev/stderr";
     }
     print ""
-    print "Pre processed awk program below: "
+    
     for (i = 1; i <= length(combined); i++) {
         if (index(combined[i], "\"")){
             in_quotes = !in_quotes;  
         }
         if (in_quotes) {
-            printf "%s", combined[i];
-        } else {
-            printf "%s ", combined[i];
-        }
-    }
-    printf "\n";
-
-    print "Possibly completed product below"
-
-    for (i = 1; i <= length(combined); i++) {
-        if (index(combined[i], "\"")){
-            in_quotes = !in_quotes;  
-        }
-        if (in_quotes) {
-            printf "%s", combined[i];
+            # printf "%s", combined[i];
+            continue;
         } else {
             for (j = 1; j < length(search); j++) { 
                 printf "\tComparing %s to %s\n", combined[i], search[j];
@@ -88,6 +75,18 @@ BEGIN {
                     break;
                 }
             }
+            # printf "%s ", combined[i];
+        }
+    }
+    printf "\n";
+    print "Pre processed awk program below: "
+    for (i = 1; i <= length(combined); i++) {
+        if (index(combined[i], "\"")){
+            in_quotes = !in_quotes;  
+        }
+        if (in_quotes) {
+            printf "%s", combined[i];
+        } else {
             printf "%s ", combined[i];
         }
     }
