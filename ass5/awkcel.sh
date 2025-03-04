@@ -80,8 +80,8 @@ BEGIN {
                 if (combined[i] == search[j]) {
                     combined[i] = search[j]; 
                 }
-                printf "%s ", combined[i];
             }
+            printf "%s ", combined[i];
         }
     }
     printf "\n";
