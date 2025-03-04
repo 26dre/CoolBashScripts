@@ -44,6 +44,8 @@ BEGIN {
     for (i = 1; i < length(search); i++) {
         print "search[" i "] = " search[i] > "/dev/stderr";
     }
+    printf "Search length = %d\n", length(search) > "/dev/stderr"; 
+
 
     in_quotes = 0;
     n = split($0, tokens, /([[:space:]]+|[^[:alnum:]_]+)/, seps);  
