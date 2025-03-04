@@ -54,7 +54,7 @@ BEGIN {
         print "combined[" i "] = " combined[i] > "/dev/stderr";
     }
     print ""
-    print "Tokenized input below: "
+    print "Pre processed awk program below: "
     for (i = 1; i <= length(combined); i++) {
         if (index(combined[i], "\"")){
             in_quotes = !in_quotes;  
@@ -66,10 +66,29 @@ BEGIN {
         }
     }
     printf "\n";
-    
+
+    print "Possibly completed product below"
+
+    for (i = 1; i <= length(combined); i++) {
+        if (index(combined[i], "\"")){
+            in_quotes = !in_quotes;  
+        }
+        if (in_quotes) {
+            printf "%s", combined[i];
+        } else {
+            for (j = 1; j < length(search); j++) { 
+                if (combined[i] == search[j]) {
+                    combined[i] = search[j]; 
+                }
+                printf "%s ", combined[i];
+            }
+        }
+    }
+    printf "\n";
 }')
 
-    echo "Altered awk program: $AWK_PROGRAM"
+    echo "Pre processed awk program: $AWK_PROGRAM"
+
 }
 
 interpret_first_line
