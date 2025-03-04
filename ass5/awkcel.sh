@@ -127,7 +127,8 @@ FULL_CMD=$(echo "-F'$DELIMITER'" "'$SKIP_AWK_PROG'" "$FILENAME")
 declare -p FULL_CMD
 
 set -x
-awk "$FULL_CMD"
+# awk "$FULL_CMD"
+awk "-F'$DELIMITER'" "'$SKIP_AWK_PROG'" "$FILENAME"
 set +x 
 # awk  -F'\t' 'NR == 1 { next } $2=="00000"{print $1, "is the prof"} $2!="00000"{ print $1, "must be a TA or Reader or Student and got grade", int($3+0.5)}' name-studnum.tsv
 
