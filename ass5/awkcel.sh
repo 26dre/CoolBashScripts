@@ -94,10 +94,14 @@ BEGIN {
             in_quotes = !in_quotes;  
         }
         if (in_quotes) {
-            printf "%s", combined[i];
+            printf "%s", combined[i] > "dev/stderr";
         } else {
-            printf "%s ", combined[i];
+            printf "%s ", combined[i] > "dev/stderr";
         }
+    }
+    printf "\n";
+    for (i = 1; i <= length(combined); i++) {
+        printf "%s", combined[i] > "dev/stderr";
     }
     printf "\n";
 }')
