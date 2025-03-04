@@ -113,10 +113,11 @@ BEGIN {
 }
 
 interpret_first_line
-FULL_AWK_CMD="-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
-echo FULL_AWK_CMD = "$FULL_AWK_CMD" >&2
+# FULL_AWK_CMD="-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
+EXCLUDING_FILE_NAME="-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM'" 
+echo EXCLUDING_FILE_NAME = "$EXCLUDING_FILE_NAME" >&2
+awk "$EXCLUDING_FILE_NAME" "$FILENAME"
 # awk "$FULL_AWK_CMD"
-awk "$FULL_AWK_CMD"
 
 
 # working command
