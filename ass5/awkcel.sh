@@ -18,6 +18,10 @@ AWK_PROGRAM="$1"
 FILENAME="$2"
 
 DEBUGGING_PRINTS_LOCATION="\dev\null"
+if [ $# -eq 3 ]; then
+    DEBUGGING_PRINTS_LOCATION="\dev\stderr"
+fi
+
 {
     echo "Curr program = $0"
     echo "Awk program = $AWK_PROGRAM" 
