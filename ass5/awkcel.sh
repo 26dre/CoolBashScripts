@@ -99,7 +99,7 @@ BEGIN {
             printf "%s ", combined[i] > "/dev/stderr";
         }
     }
-    printf "\nHOLY SHIT DEAR GOD";
+    printf "\nHOLY SHIT DEAR GOD\n";
     for (i = 1; i <= length(combined); i++) {
         printf "%s", combined[i];
     }
