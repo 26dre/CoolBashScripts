@@ -40,6 +40,7 @@ BEGIN {
     split(s1, search, " ")  
 }
 {
+
     in_quotes = 0;
     n = split($0, tokens, /([[:space:]]+|[^[:alnum:]_]+)/, seps);  
     combined_idx = 1;
@@ -68,7 +69,7 @@ BEGIN {
             # printf "%s", combined[i];
             continue;
         } else {
-            for (j = 1; j < length(search); j++) { 
+            for (j = 0; j < length(search); j++) { 
                 printf "\tComparing %s to %s\n", combined[i], search[j] > "/dev/stderr";
                 if (combined[i] == search[j]) {
                     combined[i] = "$" j; 
