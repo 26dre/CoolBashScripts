@@ -120,7 +120,7 @@ echo SKIP_AWK_PROG="$SKIP_AWK_PROG"
 echo EXCLUDING_FILE_NAME = "$EXCLUDING_FILE_NAME" >&2
 # awk $EXCLUDING_FILE_NAME "$FILENAME"
 echo "FULL_CMD == " "-F'$DELIMITER'" "'$SKIP_AWK_PROG'" "$FILENAME"
-
+awk -F'$DELIMITER' '$SKIP_AWK_PROG' "$FILENAME"
 
 # working command
 # awk -v name=1 -F'\t' 'NR == 1 { next } 
