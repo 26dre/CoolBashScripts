@@ -110,7 +110,7 @@ BEGIN {
 
 }
 
-AWK_CMD_TO_RUN=%(interpret_first_line | tail -n 1)
+AWK_CMD_TO_RUN=$(interpret_first_line | tail -n 1)
 echo "CMD TO RUN $AWK_CMD_TO_RUN"
 echo "Variable declarations $AWK_VAR_DECLS"
 # awk "-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
