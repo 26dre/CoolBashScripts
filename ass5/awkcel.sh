@@ -107,7 +107,6 @@ BEGIN {
     printf "\n";
 }')
 
-    echo "Pre processed awk program: $AWK_PROGRAM"
 
 }
 
