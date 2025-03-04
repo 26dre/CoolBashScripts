@@ -41,6 +41,10 @@ BEGIN {
 }
 {
 
+    for (i = 0; i < length(search); i++) {
+        print "search[" i "] = " search[i] > "/dev/stderr";
+    }
+
     in_quotes = 0;
     n = split($0, tokens, /([[:space:]]+|[^[:alnum:]_]+)/, seps);  
     combined_idx = 1;
