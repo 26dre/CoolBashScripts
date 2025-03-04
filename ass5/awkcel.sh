@@ -90,16 +90,16 @@ BEGIN {
     }
     # printf "\n" > "/dev/stderr";
     # print "Pre processed awk program below: " >  "/dev/stderr"
-    for (i = 1; i <= length(combined); i++) {
-        if (index(combined[i], "\"")){
-            in_quotes = !in_quotes;  
-        }
-        if (in_quotes) {
-            # printf "%s", combined[i] > "/dev/stderr";
-        } else {
-            # printf "%s ", combined[i] > "/dev/stderr";
-        }
-    }
+    # for (i = 1; i <= length(combined); i++) {
+    #     if (index(combined[i], "\"")){
+    #         in_quotes = !in_quotes;  
+    #     }
+    #     if (in_quotes) {
+    #         # printf "%s", combined[i] > "/dev/stderr";
+    #     } else {
+    #         # printf "%s ", combined[i] > "/dev/stderr";
+    #     }
+    # }
     # printf "\nHOLY SHIT DEAR GOD\n" > "/dev/stderr";
     # printf "\047"
     for (i = 1; i <= length(combined); i++) {
@@ -138,6 +138,7 @@ set +x
 
 
 # working command
+#'studentNum=="00000"{print name, "is the prof"} studentNum!="00000"{ print name, "must be a TA or Reader or Student and got grade", int(grade+0.5)}'
 # awk -v name=1 -F'\t' 'NR == 1 { next } 
 # $2 == "00000" { print $name, "is the prof" } 
 # $2 != "00000" { print $name, "must be a TA or Reader or Student and got grade", int($3 + 0.5) }' name-studnum.tsv
