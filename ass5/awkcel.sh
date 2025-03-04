@@ -112,7 +112,8 @@ BEGIN {
 }
 
 interpret_first_line
-echo "AWKPROG = $AWK_PROGRAM"
+ACTUAL_AWK_PROG=$($AWK_PROGRAM | tail -n 1)
+echo "AWKPROG = $ACTUAL_AWK_PROG"
 
 # working command
 # awk -v name=1 -F'\t' 'NR == 1 { next } 
