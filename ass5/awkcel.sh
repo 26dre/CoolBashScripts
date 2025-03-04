@@ -51,6 +51,11 @@ BEGIN {
         }
     }
     for (i = 1; i <= length(combined); i++) {
+        if (index(combined[i], "\"")){
+            in_quotes = !in_quotes;
+            if (in_quotes) print "INSIDE QUOTES" > "/dev/stderr";  
+            if (!in_quotes) print "OUTSIDE QUOTES" > "/dev/stderr";  
+        }
         print "combined[" i "] = " combined[i] > "/dev/stderr";
     }
     print ""
