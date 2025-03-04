@@ -78,7 +78,7 @@ BEGIN {
         } else {
             for (j = 1; j < length(search); j++) { 
                 if (combined[i] == search[j]) {
-                    combined[i] = search[j]; 
+                    combined[i] = "\$j"; 
                 }
             }
             printf "%s ", combined[i];
