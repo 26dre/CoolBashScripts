@@ -113,10 +113,10 @@ BEGIN {
 }
 
 interpret_first_line
-FULL_AWK_CMD="-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
+FULL_AWK_CMD=-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' "$FILENAME"
 echo "$FULL_AWK_CMD" >&2
 # awk "$FULL_AWK_CMD"
-awk -F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' "$FILENAME"
+awk $FULL_AWK_CMD
 
 
 # working command
