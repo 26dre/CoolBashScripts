@@ -121,10 +121,9 @@ FULL_CMD=$(echo "-F'$DELIMITER'" "'$SKIP_AWK_PROG'" "$FILENAME")
     echo SKIP_AWK_PROG="$SKIP_AWK_PROG"
     echo EXCLUDING_FILE_NAME = "$EXCLUDING_FILE_NAME" 
     echo "FULL_CMD = $FULL_CMD"
-    echo "WANTED = ""-F'$DELIMITER'" "'$SKIP_AWK_PROG'" "$FILENAME"
+    echo "WANTED = -F'$DELIMITER'" "'$SKIP_AWK_PROG'" "$FILENAME"
 } >&2
 
-declare -p FULL_CMD
 
 set -x
 awk "$FULL_CMD"
