@@ -41,7 +41,7 @@ BEGIN {
 }
 {
 
-    for (i = 0; i < length(search); i++) {
+    for (i = 1; i < length(search); i++) {
         print "search[" i "] = " search[i] > "/dev/stderr";
     }
 
@@ -73,7 +73,7 @@ BEGIN {
             # printf "%s", combined[i];
             continue;
         } else {
-            for (j = 1; j <= length(search); j++) { 
+            for (j = 1; j <= 3; j++) { 
                 printf "\tComparing %s to %s\n", combined[i], search[j] > "/dev/stderr";
                 if (combined[i] == search[j]) {
                     printf "CONFIRMED SIMILARITY: %s == %s\n", combined[i], search[j] > "/dev/stderr";
