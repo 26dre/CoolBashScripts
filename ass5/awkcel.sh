@@ -69,7 +69,7 @@ BEGIN {
             # printf "%s", combined[i];
             continue;
         } else {
-            for (j = 0; j < length(search); j++) { 
+            for (j = 1; j < length(search); j++) { 
                 printf "\tComparing %s to %s\n", combined[i], search[j] > "/dev/stderr";
                 if (combined[i] == search[j]) {
                     printf "CONFIRMED SIMILARITY: %s == %s\n", combined[i], search[j] > "/dev/stderr";
