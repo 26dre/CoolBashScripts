@@ -101,7 +101,7 @@ BEGIN {
     }
     printf "\n";
     for (i = 1; i <= length(combined); i++) {
-        printf "%s", combined[i] > "dev/stderr";
+        printf "%s", combined[i] ;
     }
     printf "\n";
 }')
