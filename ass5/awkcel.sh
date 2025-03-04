@@ -17,11 +17,12 @@ DELIMITER="\t"
 AWK_PROGRAM="$1"
 FILENAME="$2"
 
+DEBUGGING_PRINTS_LOCATION="\dev\null"
 {
     echo "Curr program = $0"
     echo "Awk program = $AWK_PROGRAM" 
     echo "FILENAME = $FILENAME"
-} >&2
+} >$DEBUGGING_PRINTS_LOCATION
 
 # AWK_VAR_DECLS is declared such that you can add to a string and set those values in awk
 # the assumption is that the number of fields is relatively small therefore passing them in is not all that complicated
@@ -29,7 +30,7 @@ FILENAME="$2"
 
 
 interpret_first_line () {
-    echo "Interpreting the first line to set the field values..." >&2
+    echo "Interpreting the first line to set the field values..." >$DEBUGGING_PRINTS_LOCATION
     # AWK_VAR_DECLS=$(awk -F'\t' 'NR == 1 { for (i = 1; i <= NF; i++) printf "-v %s=\"$%d\" ", $i, i }' "$FILENAME")
     AWK_VAR_DECLS=$(awk -F'\t' 'NR == 1 { for (i = 1; i <= NF; i++) printf "%s ", $i }' "$FILENAME")
 
@@ -108,7 +109,7 @@ BEGIN {
     printf "\n";
 }')
 
-    echo "Pre processed awk program: $AWK_PROGRAM" >&2 
+    echo "Pre processed awk program: $AWK_PROGRAM" >$DEBUGGING_PRINTS_LOCATION 
 
 }
 
@@ -127,7 +128,7 @@ FULL_CMD=$(echo "-F'$DELIMITER'" "'$SKIP_AWK_PROG'" "$FILENAME")
     
     
     declare -p FULL_CMD
-} >&2
+} >$DEBUGGING_PRINTS_LOCATION
 
 
 # awk "$FULL_CMD"
