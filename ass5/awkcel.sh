@@ -47,10 +47,10 @@ BEGIN {
 }
 {
 
-    # for (i = 1; i < length(search); i++) {
-        # print "search[" i "] = " search[i] > "/dev/stderr";
-    # }
-    # printf "Search length = %d\n", length(search) > "/dev/stderr"; 
+    for (i = 1; i < length(search); i++) {
+        print "search[" i "] = " search[i] > "/dev/stderr";
+    }
+    printf "Search length = %d\n", length(search) > "/dev/stderr"; 
     SEARCH_LEN = length(search);
 
 
@@ -67,46 +67,46 @@ BEGIN {
     for (i = 1; i <= length(combined); i++) {
         if (index(combined[i], "\"")){
             in_quotes = !in_quotes;
-            # if (in_quotes) print "\tENTERING QUOTES" > "/dev/stderr";  
-            # if (!in_quotes) print "\tLEAVING QUOTES" > "/dev/stderr";  
+            if (in_quotes) print "\tENTERING QUOTES" > "/dev/stderr";  
+            if (!in_quotes) print "\tLEAVING QUOTES" > "/dev/stderr";  
         }
-        # print "combined[" i "] = " combined[i] > "/dev/stderr";
+        print "combined[" i "] = " combined[i] > "/dev/stderr";
     }
-    # print "" > "/dev/stderr"
+    print "" > "/dev/stderr"
     
     for (i = 1; i <= length(combined); i++) {
         if (index(combined[i], "\"")){
             in_quotes = !in_quotes;  
         }
         if (in_quotes) {
-            # printf "%s", combined[i];
+            printf "%s", combined[i];
             continue;
         } else {
             for (j = 1; j <= SEARCH_LEN; j++) { 
-                # printf "\tComparing %s to %s\n", combined[i], search[j] > "/dev/stderr";
+                printf "\tComparing %s to %s\n", combined[i], search[j] > "/dev/stderr";
                 if (combined[i] == search[j]) {
                     # printf "CONFIRMED SIMILARITY: %s == %s\n", combined[i], search[j] > "/dev/stderr";
                     combined[i] = "$" j; 
                     break;
                 }
             }
-            # printf "%s ", combined[i];
+            printf "%s ", combined[i];
         }
     }
-    # printf "\n" > "/dev/stderr";
-    # print "Pre processed awk program below: " >  "/dev/stderr"
-    # for (i = 1; i <= length(combined); i++) {
-    #     if (index(combined[i], "\"")){
-    #         in_quotes = !in_quotes;  
-    #     }
-    #     if (in_quotes) {
-    #         # printf "%s", combined[i] > "/dev/stderr";
-    #     } else {
-    #         # printf "%s ", combined[i] > "/dev/stderr";
-    #     }
-    # }
-    # printf "\nHOLY SHIT DEAR GOD\n" > "/dev/stderr";
-    # printf "\047"
+    printf "\n" > "/dev/stderr";
+    print "Pre processed awk program below: " >  "/dev/stderr"
+    for (i = 1; i <= length(combined); i++) {
+        if (index(combined[i], "\"")){
+            in_quotes = !in_quotes;  
+        }
+        if (in_quotes) {
+            # printf "%s", combined[i] > "/dev/stderr";
+        } else {
+            # printf "%s ", combined[i] > "/dev/stderr";
+        }
+    }
+    printf "\nHOLY SHIT DEAR GOD\n" > "/dev/stderr";
+    printf "\047"
     for (i = 1; i <= length(combined); i++) {
         printf "%s", combined[i];
     }
