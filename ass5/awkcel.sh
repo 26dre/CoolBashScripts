@@ -116,10 +116,12 @@ interpret_first_line
 # FULL_AWK_CMD="-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
 # EXCLUDING_FILE_NAME=-F'$DELIMITER' "'NR == 1 { next } $AWK_PROGRAM'" 
 SKIP_AWK_PROG="NR == 1 { next } $AWK_PROGRAM"
+FULL_CMD=$(echo "-F'$DELIMITER'" "'$SKIP_AWK_PROG'" "$FILENAME")
 {
     echo SKIP_AWK_PROG="$SKIP_AWK_PROG"
     echo EXCLUDING_FILE_NAME = "$EXCLUDING_FILE_NAME" 
-    echo "FULL_CMD == " "-F'$DELIMITER'" "'$SKIP_AWK_PROG'" "$FILENAME"
+    echo "FULL_CMD = $FULL_CMD"
+    echo "WANTED = ""-F'$DELIMITER'" "'$SKIP_AWK_PROG'" "$FILENAME"
 } >&2
 awk -F'$DELIMITER' "$SKIP_AWK_PROG" "$FILENAME"
 # awk  -F'\t' 'NR == 1 { next } $2=="00000"{print $1, "is the prof"} $2!="00000"{ print $1, "must be a TA or Reader or Student and got grade", int($3+0.5)}' name-studnum.tsv
