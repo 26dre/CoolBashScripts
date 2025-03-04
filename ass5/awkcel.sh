@@ -110,9 +110,10 @@ BEGIN {
 
 }
 
-AWK_CMD_TO_RUN=$(interpret_first_line | tail -n 1)
-echo "CMD TO RUN $AWK_CMD_TO_RUN"
-echo "Variable declarations $AWK_VAR_DECLS"
+interpret_first_line
+# AWK_CMD_TO_RUN=$(interpret_first_line | tail -n 1)
+# echo "CMD TO RUN $AWK_CMD_TO_RUN"
+# echo "Variable declarations $AWK_VAR_DECLS"
 # awk "-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
 #  awk -F'\t' 'NR > 1 {$2 == "00000" { print $1, "is the prof" } 
 # $2 != "00000" { print $1, "must be a TA or Reader or Student and got grade", int($3 + 0.5) }}' name-studnum.tsv
