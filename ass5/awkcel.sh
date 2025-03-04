@@ -66,7 +66,7 @@ BEGIN {
         }
         print "combined[" i "] = " combined[i] > "/dev/stderr";
     }
-    print ""
+    print "" > "/dev/stderr"
     
     for (i = 1; i <= length(combined); i++) {
         if (index(combined[i], "\"")){
@@ -87,7 +87,7 @@ BEGIN {
             # printf "%s ", combined[i];
         }
     }
-    printf "\n";
+    printf "\n" > "/dev/stderr";
     print "Pre processed awk program below: " >  "/dev/stderr"
     for (i = 1; i <= length(combined); i++) {
         if (index(combined[i], "\"")){
@@ -99,7 +99,7 @@ BEGIN {
             printf "%s ", combined[i] > "/dev/stderr";
         }
     }
-    printf "\nHOLY SHIT DEAR GOD\n";
+    printf "\nHOLY SHIT DEAR GOD\n" > "/dev/stderr";
     printf "\047"
     for (i = 1; i <= length(combined); i++) {
         printf "%s", combined[i];
