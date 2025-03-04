@@ -19,8 +19,10 @@ FILENAME="$2"
 
 
 
-echo "Awk program = $AWK_PROGRAM"
-echo "FILENAME = $FILENAME"
+{
+    echo "Awk program = $AWK_PROGRAM" 
+    echo "FILENAME = $FILENAME"
+} >&2
 
 # AWK_VAR_DECLS is declared such that you can add to a string and set those values in awk
 # the assumption is that the number of fields is relatively small therefore passing them in is not all that complicated
@@ -107,7 +109,7 @@ BEGIN {
     printf "\n";
 }')
 
-    echo "Pre processed awk program: $AWK_PROGRAM"
+    echo "Pre processed awk program: $AWK_PROGRAM" >&2 
 
 }
 
