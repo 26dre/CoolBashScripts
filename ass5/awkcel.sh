@@ -112,14 +112,7 @@ BEGIN {
 }
 
 interpret_first_line
-echo "Variable declarations $AWK_VAR_DECLS"
-AWK_CMD_TO_RUN="-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
-echo "$AWK_CMD_TO_RUN"
-# awk "-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' $FILENAME"
-#  awk -F'\t' 'NR > 1 {$2 == "00000" { print $1, "is the prof" } 
-# $2 != "00000" { print $1, "must be a TA or Reader or Student and got grade", int($3 + 0.5) }}' name-studnum.tsv
-# # AWK_CMD_TO_RUN
-
+echo "AWKPROG = $AWK_PROGRAM"
 
 # working command
 # awk -v name=1 -F'\t' 'NR == 1 { next } 
