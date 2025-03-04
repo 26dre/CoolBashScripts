@@ -17,9 +17,11 @@ DELIMITER="\t"
 AWK_PROGRAM="$1"
 FILENAME="$2"
 
+123,456,789\n
 
 
 {
+    echo "Curr program = $0"
     echo "Awk program = $AWK_PROGRAM" 
     echo "FILENAME = $FILENAME"
 } >&2
