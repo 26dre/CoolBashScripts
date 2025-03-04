@@ -42,9 +42,9 @@ BEGIN {
 }
 {
 
-    for (i = 1; i < length(search); i++) {
-        print "search[" i "] = " search[i] > "/dev/stderr";
-    }
+    # for (i = 1; i < length(search); i++) {
+        # print "search[" i "] = " search[i] > "/dev/stderr";
+    # }
     # printf "Search length = %d\n", length(search) > "/dev/stderr"; 
     SEARCH_LEN = length(search);
 
@@ -65,9 +65,9 @@ BEGIN {
             # if (in_quotes) print "\tENTERING QUOTES" > "/dev/stderr";  
             # if (!in_quotes) print "\tLEAVING QUOTES" > "/dev/stderr";  
         }
-        print "combined[" i "] = " combined[i] > "/dev/stderr";
+        # print "combined[" i "] = " combined[i] > "/dev/stderr";
     }
-    print "" > "/dev/stderr"
+    # print "" > "/dev/stderr"
     
     for (i = 1; i <= length(combined); i++) {
         if (index(combined[i], "\"")){
@@ -112,11 +112,11 @@ BEGIN {
 
 }
 
-interpret_first_line
-FULL_AWK_CMD=-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM' "$FILENAME"
-echo "$FULL_AWK_CMD" >&2
+AWK_PROGRAM=interpret_first_line
+FULL_AWK_CMD="-F'$DELIMITER' 'NR == 1 { next } $AWK_PROGRAM" "$FILENAME"
+echo FULL_AWK_CMD = "$FULL_AWK_CMD" >&2
 # awk "$FULL_AWK_CMD"
-awk $FULL_AWK_CMD
+awk "$FULL_AWK_CMD"
 
 
 # working command
