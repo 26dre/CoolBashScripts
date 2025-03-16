@@ -187,7 +187,7 @@ void job_factory_wait(job_factory_t *_job_factory)
     pthread_mutex_lock(&(_job_factory->job_factory_mutex));
     while (true)
     {
-        if (jobs_left(_job_factory) || (!_job_factory->stop && _job_factory->job_proc_cnt != 0) || (_job_factory == 0 && _job_factory->thread_cnt != 0))
+        if (jobs_left(_job_factory) || (!_job_factory->stop && _job_factory->job_proc_cnt != 0) || (_job_factory->job_proc_cnt == 0 && _job_factory->thread_cnt != 0))
         {
             pthread_cond_wait(&(_job_factory->job_completed_cond), &(_job_factory->job_factory_mutex));
         }
