@@ -1,0 +1,9 @@
+awkcel '
+{
+    if (date=="2011-07-01")
+        last_val = AMZN;
+}
+END {
+    if (last_val != "")
+        print last_val;
+}' stock.tsv

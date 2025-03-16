@@ -1,0 +1,4 @@
+awkcel 'studentNum=="00000"{print name, "is the prof"} studentNum!="00000"{ print name, "must be a TA or Reader or Student and got grade", int(grade+0.5)}' name-studnum.tsv
+
+awkcel 'studentNum=="00000"{print name, "is the prof"} \
+ studentNum!="00000"{ print name, "must be a TA or Reader or Student and got grade", int(grade+0.5)}' name-studnum.tsv

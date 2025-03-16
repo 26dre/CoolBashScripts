@@ -26,3 +26,10 @@ def parse_first_line(delimited_str: str, delimiter: str) -> Dict[str, Position]:
 def parse_file_line(csv_reader, predicate: Callable[[VariableName], bool], fields_requested: List[VariableName]):
     if fields_requested is None:
         return  # this is done to save any precious micro seconds in the competition against awk
+
+
+def s(pay, options, interest, years):
+
+    total = options + pay*.5
+    for i in range(years):
+        total = total*interest + options + pay
