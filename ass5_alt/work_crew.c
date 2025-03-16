@@ -56,7 +56,7 @@ static void *factory_worker(void *job_factory)
     while (true)
     {
         pthread_mutex_lock(&(_job_factory->job_factory_mutex));
-        while (jobs_left(_job_factory) && !_job_factory->stop)
+        while (!jobs_left(_job_factory) && !_job_factory->stop)
         {
             pthread_cond_wait(&(_job_factory->job_left_cond), &(_job_factory->job_factory_mutex));
         }
