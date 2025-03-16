@@ -7,6 +7,13 @@
 #include "work_crew.h"
 #define MIN_JOB_SIZE 2
 
+static void print_job_factory(job_factory_t *_job_factory)
+{
+    if (_job_factory == NULL)
+        return;
+    printf("Printed real job factory");
+}
+
 static job_t *create_job(job_func_t job, void *arg)
 {
     if (job == NULL)
@@ -95,7 +102,8 @@ job_factory_t *create_job_factory(size_t num_workers, size_t jobs_cnt)
         }
     }
 
-    _job_factory = malloc(sizeof(job_factory_t));
+    _job_factory = (job_factory_t *)malloc(sizeof(job_factory_t));
+    print_job_factory(_job_factory);
     _job_factory->thread_cnt = num_workers;
 
     pthread_mutex_init(&(_job_factory->job_factory_mutex), NULL);

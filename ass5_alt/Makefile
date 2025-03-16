@@ -1,10 +1,9 @@
-GCC_OPTIONS=-Wall -Werror -pthread -arch arm64
+GCC_OPTIONS=-Wall -Werror -pthread
 DEBUG_FLAGS = -g
 
 
 default:
 	gcc -c work_crew.c $(GCC_OPTIONS)
-
 
 run: 
 	gcc -o test_work_crew.o test_work_crew.c work_crew.c $(GCC_OPTIONS)
