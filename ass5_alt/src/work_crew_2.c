@@ -34,7 +34,6 @@ void destroy_job(job_t *job_to_destroy)
 
 static bool has_job(job_factory_t *_job_factory)
 {
-    assert(_job_factory != NULL);
 
     // printf("curr_job = %lu < jobs_cnt = %lu\n", _job_factory->curr_job, _job_factory->jobs_size);
     return _job_factory->jobs_cnt > 0 && _job_factory->curr_job < _job_factory->jobs_size;
@@ -53,7 +52,6 @@ job_t *get_job(job_factory_t *_job_factory)
     }
 
     job_t *curr_job = _job_factory->jobs[_job_factory->curr_job];
-    _job_factory->curr_job++;
     return curr_job;
 }
 
@@ -85,6 +83,7 @@ static void *factory_worker(void *factory)
 
         if (job == NULL)
             continue;
+        _job_factory->curr_job++;
 
         printf("THREAD ID (%p) RUNNING:\n", pthread_self());
         job->job(job->args);
