@@ -34,9 +34,8 @@ void destroy_job(job_t *job_to_destroy)
 
 static bool has_job(job_factory_t *_job_factory)
 {
-
     // printf("curr_job = %lu < jobs_cnt = %lu\n", _job_factory->curr_job, _job_factory->jobs_size);
-    return _job_factory->jobs_cnt > 0 && _job_factory->curr_job < _job_factory->jobs_size;
+    return _job_factory->jobs_cnt > 0 && _job_factory->curr_job < _job_factory->jobs_cnt;
 }
 
 job_t *get_job(job_factory_t *_job_factory)
@@ -52,12 +51,12 @@ job_t *get_job(job_factory_t *_job_factory)
     }
 
     job_t *curr_job = _job_factory->jobs[_job_factory->curr_job];
+    _job_factory->curr_job++; // Increment immediately after getting the job while still holding the lock
     return curr_job;
 }
 
 static void *factory_worker(void *factory)
 {
-
     job_factory_t *_job_factory = (job_factory_t *)factory;
     job_t *job;
 
@@ -78,25 +77,26 @@ static void *factory_worker(void *factory)
             break;
         }
 
-        job = get_job(_job_factory);
-        pthread_mutex_unlock(&(_job_factory->factory_mutex));
+        job = get_job(_job_factory); // This now increments curr_job while holding the lock
 
-        if (job == NULL)
-            continue;
-        _job_factory->curr_job++;
-
-        printf("THREAD ID (%p) RUNNING:\n", pthread_self());
-        job->job(job->args);
-        // destroy_job(job);
-        pthread_mutex_lock(&(_job_factory->factory_mutex));
-        if (!has_job(_job_factory))
+        // Check if all jobs are processed to signal other threads
+        // if (!has_job(_job_factory) && _job_factory->curr_job >= _job_factory->jobs_cnt)
+        if (!has_job(_job_factory) && _job_factory->curr_job >= _job_factory->jobs_size)
         {
             printf("Done processing jobs\n");
             print_job_factory(_job_factory);
             _job_factory->done = true;
             pthread_cond_broadcast(&(_job_factory->factory_cond));
         }
+
         pthread_mutex_unlock(&(_job_factory->factory_mutex));
+
+        if (job == NULL)
+            continue;
+
+        printf("THREAD ID (%p) RUNNING:\n", pthread_self());
+        job->job(job->args);
+        // destroy_job(job); // Note: jobs are destroyed in destroy_job_factory
     }
 
     printf("THREAD ID (%p) DYING:\n", pthread_self());
@@ -140,6 +140,7 @@ job_factory_t *create_job_factory(size_t num_workers, size_t jobs_max)
 
     new_job_factory->done = false;
     new_job_factory->jobs_cnt = 0;
+    new_job_factory->curr_job = 0;
 
     pthread_t curr_thread;
     for (size_t i = 0; i < num_workers; i++)
@@ -148,7 +149,6 @@ job_factory_t *create_job_factory(size_t num_workers, size_t jobs_max)
         printf("Created a new thread with value %p\n", curr_thread);
         pthread_detach(curr_thread);
     }
-    new_job_factory->curr_job = 0;
 
     print_job_factory(new_job_factory);
     return new_job_factory;
@@ -166,13 +166,14 @@ static void destroy_jobs(job_t **jobs, size_t jobs_size)
 
 void destroy_job_factory(job_factory_t *job_factory_to_destroy)
 {
-    pthread_mutex_lock(&(job_factory_to_destroy->factory_mutex));
     if (job_factory_to_destroy == NULL)
     {
         return;
     }
 
-    destroy_jobs(job_factory_to_destroy->jobs, job_factory_to_destroy->jobs_size);
+    pthread_mutex_lock(&(job_factory_to_destroy->factory_mutex));
+    destroy_jobs(job_factory_to_destroy->jobs, job_factory_to_destroy->jobs_cnt);
+    free(job_factory_to_destroy->jobs);
     job_factory_to_destroy->done = true;
     pthread_cond_broadcast(&(job_factory_to_destroy->factory_cond));
     pthread_mutex_unlock(&(job_factory_to_destroy->factory_mutex));
@@ -189,9 +190,10 @@ bool add_job(job_factory_t *_job_factory, job_fn_t _job_func, void *args)
         return false;
 
     pthread_mutex_lock(&(_job_factory->factory_mutex));
-    if (_job_factory->jobs_cnt >= _job_factory->jobs_size)
+    if (_job_factory->jobs_cnt > _job_factory->jobs_size) // fix?
     {
         printf("Returning false\n");
+        pthread_mutex_unlock(&(_job_factory->factory_mutex));
         return false;
     }
 
